@@ -1,14 +1,19 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useContext } from "react";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin, { Draggable } from "@fullcalendar/interaction";
+import { UserDataContext } from "../layout";
 
 export default function CalendarPage() {
+  const { transcriptData } = useContext(UserDataContext); // Access the context
   const sidebarRef = useRef(null);
 
-  // Initialize draggable events
+  useEffect(() => {
+    console.log("Transcript Data from Context:", transcriptData);
+  }, [transcriptData]);
+
   useEffect(() => {
     if (sidebarRef.current) {
       new Draggable(sidebarRef.current, {
@@ -24,6 +29,9 @@ export default function CalendarPage() {
     }
   }, []);
 
+  const classes = transcriptData?.classes || []; // Default to an empty array if transcriptData or classes is undefined
+
+  // Example events for the calendar
   const events = [
     {
       title: "Design Review",
@@ -46,98 +54,53 @@ export default function CalendarPage() {
   ];
 
   return (
-    <div className="flex gap-4 p-4">
-      {/* Sidebar */}
-      <div ref={sidebarRef} className="w-48 space-y-2 border p-2" id="events">
-        <p className="mb-2 font-bold">Draggable Events</p>
-        {events.map((event, index) => (
-          <div
-            key={index}
-            className={`fc-event cursor-move rounded ${event.color} px-2 py-1 text-white`}
-            data-title={event.title}
-            data-start={event.start}
-            data-end={event.end}>
-            {event.title}
-          </div>
-        ))}
+    <div className="flex flex-col gap-8 p-4">
+      {/* Classes Section */}
+      <div>
+        <h1 className="text-2xl font-bold">Classes</h1>
+        <ul className="list-disc pl-6">
+          {classes.map((className, index) => (
+            <li key={index} className="text-lg">
+              {className}
+            </li>
+          ))}
+        </ul>
       </div>
 
-      {/* Calendar */}
-      <div className="flex-1">
-        <FullCalendar
-          plugins={[timeGridPlugin, interactionPlugin]}
-          initialView="timeGridWeek"
-          initialDate="2025-04-14"
-          slotMinTime="08:00:00"
-          slotMaxTime="22:00:00"
-          weekends={false}
-          allDaySlot={false}
-          headerToolbar={false}
-          height="auto"
-          editable={true}
-          droppable={true}
-          //   eventReceive={(info) => {
-          //     const el = info.draggedEl;
+      {/* Calendar Section */}
+      <div className="flex gap-4">
+        {/* Sidebar for draggable events */}
+        <div ref={sidebarRef} className="w-48 space-y-2 border p-2" id="events">
+          <p className="mb-2 font-bold">Draggable Events</p>
+          {events.map((event, index) => (
+            <div
+              key={index}
+              className={`fc-event cursor-move rounded ${event.color} px-2 py-1 text-white`}
+              data-title={event.title}
+              data-start={event.start}
+              data-end={event.end}
+            >
+              {event.title}
+            </div>
+          ))}
+        </div>
 
-          //     // Override with original times
-          //     info.event.setStart(el.getAttribute("data-start"));
-          //     info.event.setEnd(el.getAttribute("data-end"));
-
-          //     // Optionally remove from sidebar
-          //     try {
-          //       el.parentNode.removeChild(el);
-          //     } catch (e) {
-          //       console.warn("Error removing element from sidebar:", e);
-          //     }
-          //   }}
-          //   eventDragStop={(info) => {
-          //     const sidebar = document.getElementById("events");
-
-          //     const sidebarRect = sidebar.getBoundingClientRect();
-          //     const { clientX: x, clientY: y } = info.jsEvent;
-
-          //     const inSidebar =
-          //       x >= sidebarRect.left &&
-          //       x <= sidebarRect.right &&
-          //       y >= sidebarRect.top &&
-          //       y <= sidebarRect.bottom;
-          //     if (inSidebar) {
-          //       // 1. Remove from calendar
-          //       info.event.remove();
-
-          //       // 2. Recreate DOM element for sidebar
-          //       const eventEl = document.createElement("div");
-          //       eventEl.innerText = info.event.title;
-          //       eventEl.className =
-          //         "fc-event cursor-move rounded bg-blue-500 px-2 py-1 text-white mb-2";
-          //       eventEl.setAttribute("data-title", info.event.title);
-          //       eventEl.setAttribute(
-          //         "data-start",
-          //         info.event.start.toISOString()
-          //       );
-          //       eventEl.setAttribute("data-end", info.event.end.toISOString());
-
-          //       sidebar.appendChild(eventEl);
-
-          //       // 3. Re-init draggable on the new element
-          //       new Draggable(sidebar, {
-          //         itemSelector: ".fc-event",
-          //         eventData: function (eventEl) {
-          //           return {
-          //             title: eventEl.getAttribute("data-title"),
-          //             start: eventEl.getAttribute("data-start"),
-          //             end: eventEl.getAttribute("data-end"),
-          //           };
-          //         },
-          //       });
-          //     } else {
-          //       const el = info.draggedEl;
-          //       // Override with original times
-          //       info.event.setStart(el.getAttribute("data-start"));
-          //       info.event.setEnd(el.getAttribute("data-end"));
-          //     }
-          //   }}
-        />
+        {/* FullCalendar Component */}
+        <div className="flex-1">
+          <FullCalendar
+            plugins={[timeGridPlugin, interactionPlugin]}
+            initialView="timeGridWeek"
+            initialDate="2025-04-14"
+            slotMinTime="08:00:00"
+            slotMaxTime="22:00:00"
+            weekends={false}
+            allDaySlot={false}
+            headerToolbar={false}
+            height="auto"
+            editable={true}
+            droppable={true}
+          />
+        </div>
       </div>
     </div>
   );

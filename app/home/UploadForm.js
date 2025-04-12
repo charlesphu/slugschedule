@@ -1,15 +1,17 @@
 "use client";
 
-import React, { useContext, useState } from "react"; // Import useContext
+import React, { useContext, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { usePDFToText } from "../hooks/usePDFToText";
-import { UserDataContext } from "../layout"; // Import the context
+import { UserDataContext } from "../layout";
+import { useRouter } from "next/navigation";
 import { useWebscrape } from "../hooks/webscrape"; // Import the web scraping hook
 
 function UploadArea() {
-  const { setTranscriptData } = useContext(UserDataContext); // Access the context to update transcript data
+  const { setTranscriptData } = useContext(UserDataContext);
   const [isFileUploading, setIsFileUploading] = useState(false);
   const [isFileUploaded, setIsFileUploaded] = useState(false);
+  const router = useRouter();
 
   const onDrop = async (acceptedFiles) => {
     setIsFileUploading(true);
@@ -21,7 +23,6 @@ function UploadArea() {
     try {
       console.log("Extracted PDF Text:", pdfText);
 
-      // Send the extracted text to the backend
       const response = await fetch("/api/gemini", {
         method: "POST",
         headers: {
@@ -37,8 +38,15 @@ function UploadArea() {
       console.log("Transcript data: ", data);
 
       if (data.success) {
-        // Update the context with the transcript data
-        setTranscriptData(data.data);
+        // Extract the text field and parse it as JSON
+        const rawText = data.data.candidates[0].content.parts[0].text;
+        const jsonText = JSON.parse(rawText.replace(/```json\n|\n```/g, "")); // Remove code block markers and parse JSON
+
+        // Update the context with the parsed JSON object
+        setTranscriptData(jsonText);
+
+        // Reroute to /calendar
+        router.push("/calendar");
       } else {
         console.error("Error from API:", data.error);
       }
