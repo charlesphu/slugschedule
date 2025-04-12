@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import React, {createContext, useState} from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -10,6 +11,9 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+export const UserDataContext = createContext();
+
 
 export const metadata = {
   title: "Create Next App",
@@ -22,7 +26,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <UserDataContext.Provider value={{trancriptData, setTranscriptData}}>
+          {children}
+        </UserDataContext.Provider>
       </body>
     </html>
   );
