@@ -17,21 +17,25 @@ export default function Home() {
         <img
           className="absolute top-5 left-20 h-[20%] w-[12%] object-contain"
           src={"Decor 1.png"}
+          alt="Decoration"
           draggable={false}
         />
         <img
           className="absolute top-2 right-20 h-[20%] w-[7%] object-contain"
           src={"Decor 2.png"}
+          alt="Decoration"
           draggable={false}
         />
         <img
           className="absolute bottom-2 left-20 z-3 h-[30%] w-[20%] object-contain"
           src={"Slug Draw.png"}
+          alt="Slug Drawing"
           draggable={false}
         />
         <img
           className="absolute right-20 bottom-2 z-3 h-[30%] w-[20%] object-contain"
           src={"Decor 3.png"}
+          alt="Decoration"
           draggable={false}
         />
       </div>
