@@ -4,6 +4,7 @@ import React, { useContext, useState } from "react"; // Import useContext
 import { useDropzone } from "react-dropzone";
 import { usePDFToText } from "../hooks/usePDFToText";
 import { UserDataContext } from "../layout"; // Import the context
+import { useWebscrape } from "../hooks/webscrape"; // Import the web scraping hook
 
 function UploadArea() {
   const { setTranscriptData } = useContext(UserDataContext); // Access the context to update transcript data
@@ -46,6 +47,35 @@ function UploadArea() {
     } finally {
       setIsFileUploaded(true);
       setIsFileUploading(false);
+    }
+    await handleScrapeAndSendToGemini();
+  };
+
+  const handleScrapeAndSendToGemini = async () => {
+    const url =
+     "https://catalog.ucsc.edu/en/current/general-catalog/academic-units/baskin-engineering/computer-science-and-engineering/computer-science-bs/";
+
+    try {
+      // Scrape both URLs
+      const scrapedHTML = await useWebscrape(url);
+      console.log("Combined Scraped HTML:", scrapedHTML);
+
+      // Send the combined scraped data to Gemini
+      const response = await fetch("/api/gemini", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          pdfText: scrapedHTML, // Reusing pdfText field for simplicity
+          requestType: "majorRequirements",
+        }),
+      });
+
+      const data = await response.json();
+      console.log("Gemini Response for Scraped Data:", data);
+    } catch (error) {
+      console.error("Error scraping URLs or sending to Gemini:", error);
     }
   };
 
