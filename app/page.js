@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import { usePDFToText } from "./hooks/usePDFToText";
+import { useWebscrape } from "./hooks/webscrape";
 
 export default function Home() {
   const [fileName, setFileName] = React.useState("No transcript selected");
@@ -48,13 +49,42 @@ export default function Home() {
        /*** ^^^^^^^^^^^
        * THIS VARIABLE RIGHT HERE IS THE RETURNED ARRAY OF CLASSES FROM GEMINI 
        ***/
-      
+      console.log("Gemini's Responseeeee:", data);
 
+      await handleWebScraping();
     } catch (error) {
       console.error("Error calling the API:", error);
     }
   };
-
+  
+  const handleWebScraping = async () => {
+    const url =
+      "https://catalog.ucsc.edu/en/current/general-catalog/academic-units/baskin-engineering/computer-science-and-engineering/computer-science-bs/";
+  
+    try {
+      // Use the webscraper to scrape the HTML content
+      const scrapedHTML = await useWebscrape(url);
+      console.log("Scraped HTML Content:", scrapedHTML);
+  
+      // Send the scraped HTML to Gemini
+      const response = await fetch("/api/gemini", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          requestType: "majorRequirements",
+          pdfText: scrapedHTML,
+        }),
+      });
+  
+      const data = await response.json();
+      console.log("Gemini's Response for Web Scraping:", data);
+    } catch (error) {
+      console.error("Error in handleWebScraping:", error);
+    }
+  };
+  
   return (
     <div className="flex h-screen flex-col items-center justify-center gap-4">
       <input

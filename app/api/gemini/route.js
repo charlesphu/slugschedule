@@ -27,12 +27,18 @@ export async function POST(request) {
         "Current Major: (student major, please make it read and casual, no shorthand language. Like: Computer Science, Biology) " +
         "Short words: (max 20 words) of encouragement based off recently taken classes: (Encouragement)" +
         pdfText;
-        } else if (request == "majorRequirements") {
-      let urlText = null;
+    } else if (requestType == "majorRequirements") {
+      console.log("request type:" +request);
+      if (!pdfText) {
+        return new Response(
+          JSON.stringify({ success: false, error: "URL text is required." }),
+          { status: 400, headers: { "Content-Type": "application/json" } }
+        );
+      }
       prompt =
-        "Please parse this to find all the course names and codes: " + urlText;
-        }
-        console.log("reust type:", requestType);
+        "Please parse this to find all the course names and codes: " + pdfText;
+    }
+    console.log("reust type:", requestType);
     const geminiResponse = await sendTxtAndPrompt(prompt);
 
     return new Response(JSON.stringify(geminiResponse), {
