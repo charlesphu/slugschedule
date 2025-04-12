@@ -44,10 +44,12 @@ export default function Home() {
 
       console.log("passed data:", pdfText);
       const data = await response.json();
+      const geminiResponseJSON = data.data;
        /*** ^^^^^^^^^^^
        * THIS VARIABLE RIGHT HERE IS THE RETURNED ARRAY OF CLASSES FROM GEMINI 
        ***/
-      console.log("Gemini's Responseeeee:", data);
+      
+
     } catch (error) {
       console.error("Error calling the API:", error);
     }
