@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { sendPrompt } from "./hooks/aiPrompt";
 import { usePDFToText } from "./hooks/usePDFToText";
 import { webscrape } from "./hooks/webscrape";
+
 export default function Home() {
   const [fileName, setFileName] = React.useState("No transcript selected");
   const fileInputRef = useRef(null);
@@ -23,6 +23,23 @@ export default function Home() {
     fileInputRef.current.click();
   };
 
+  const handleTestAI = async () => {
+    try {
+      const response = await fetch("/api/gemini", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt: "This is a hardcoded prompt." }), // Hardcoded prompt
+      });
+
+      const data = await response.json();
+      console.log("Gemini's Responswwwe:", data);
+    } catch (error) {
+      console.error("Error calling the API:", error);
+    }
+  };
+
   return (
     <div className="flex h-screen flex-col items-center justify-center gap-4">
       <input
@@ -35,19 +52,17 @@ export default function Home() {
 
       <button
         onClick={handleButtonClick}
-        className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700">
+        className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+      >
         Choose PDF File
       </button>
 
       <p>{fileName}</p>
 
       <button
-        onClick={() => {
-          sendPrompt("Hello");
-          // webscrape(
-          //   "https://catalog.ucsc.edu/en/current/general-catalog/courses/cse-computer-science-and-engineering/lower-division/"
-          // );
-        }}>
+        onClick={handleTestAI} // Call the new function
+        className="rounded bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-700"
+      >
         Test AI
       </button>
     </div>
