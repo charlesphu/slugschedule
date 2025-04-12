@@ -3,7 +3,7 @@
 import React, { useState, useRef } from "react";
 import { sendPrompt } from "./hooks/aiPrompt";
 import { usePDFToText } from "./hooks/usePDFToText";
-
+import { webscrape } from "./hooks/webscrape";
 export default function Home() {
   const [fileName, setFileName] = React.useState("No transcript selected");
   const fileInputRef = useRef(null);
@@ -44,6 +44,9 @@ export default function Home() {
       <button
         onClick={() => {
           sendPrompt("Hello");
+          // webscrape(
+          //   "https://catalog.ucsc.edu/en/current/general-catalog/courses/cse-computer-science-and-engineering/lower-division/"
+          // );
         }}>
         Test AI
       </button>

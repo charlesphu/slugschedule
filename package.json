@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@google/genai": "^0.8.0",
+    "axios": "^1.8.4",
+    "cheerio": "^1.0.0",
     "next": "15.3.0",
     "pdfjs-dist": "^5.1.91",
     "postcss": "^8.5.3",
