@@ -1,6 +1,5 @@
 import React from "react";
-import ge
 export default function Home() {
-  <button></button>
+  <button className=""></button>;
   return "Hello World";
 }
