@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { sendPrompt } from "./hooks/aiPrompt";
 
 export default function Home() {
   const [fileName, setFileName] = React.useState("No transcript selected");
@@ -35,6 +36,13 @@ export default function Home() {
       </button>
 
       <p>{fileName}</p>
+
+      <button
+        onClick={() => {
+          sendPrompt("Hello");
+        }}>
+        Test AI
+      </button>
     </div>
   );
 }

@@ -6,7 +6,7 @@ export async function POST(request) {
   // console.log("request: ", request);
   const { prompt } = await request.json();
   const response = await ai.models.generateContent({
-    model: "gemini-1.5-flash",
+    model: "gemini-2.0-flash",
     contents: prompt,
   });
   console.log(response.text);
