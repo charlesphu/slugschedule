@@ -1,4 +1,4 @@
-export async function myFunction(prompt) {
+export async function sendPrompt(prompt) {
   try {
     const response = await fetch("/api/gemini", {
       method: "POST",
