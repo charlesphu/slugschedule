@@ -76,65 +76,67 @@ export default function CalendarPage() {
           height="auto"
           editable={true}
           droppable={true}
-          eventReceive={(info) => {
-            const el = info.draggedEl;
+          //   eventReceive={(info) => {
+          //     const el = info.draggedEl;
 
-            // Override with original times
-            info.event.setStart(el.getAttribute("data-start"));
-            info.event.setEnd(el.getAttribute("data-end"));
+          //     // Override with original times
+          //     info.event.setStart(el.getAttribute("data-start"));
+          //     info.event.setEnd(el.getAttribute("data-end"));
 
-            // Optionally remove from sidebar
-            el.parentNode.removeChild(el);
-          }}
-          eventDragStop={(info) => {
-            const sidebar = document.getElementById("events");
+          //     // Optionally remove from sidebar
+          //     try {
+          //       el.parentNode.removeChild(el);
+          //     } catch (e) {
+          //       console.warn("Error removing element from sidebar:", e);
+          //     }
+          //   }}
+          //   eventDragStop={(info) => {
+          //     const sidebar = document.getElementById("events");
 
-            const sidebarRect = sidebar.getBoundingClientRect();
-            const { clientX: x, clientY: y } = info.jsEvent;
+          //     const sidebarRect = sidebar.getBoundingClientRect();
+          //     const { clientX: x, clientY: y } = info.jsEvent;
 
-            const inSidebar =
-              x >= sidebarRect.left &&
-              x <= sidebarRect.right &&
-              y >= sidebarRect.top &&
-              y <= sidebarRect.bottom;
-            console.log(inSidebar);
-            if (inSidebar) {
-              // 1. Remove from calendar
-              info.event.remove();
+          //     const inSidebar =
+          //       x >= sidebarRect.left &&
+          //       x <= sidebarRect.right &&
+          //       y >= sidebarRect.top &&
+          //       y <= sidebarRect.bottom;
+          //     if (inSidebar) {
+          //       // 1. Remove from calendar
+          //       info.event.remove();
 
-              // 2. Recreate DOM element for sidebar
-              const eventEl = document.createElement("div");
-              eventEl.innerText = info.event.title;
-              eventEl.className =
-                "fc-event cursor-move rounded bg-blue-500 px-2 py-1 text-white mb-2";
-              eventEl.setAttribute("data-title", info.event.title);
-              eventEl.setAttribute(
-                "data-start",
-                info.event.start.toISOString()
-              );
-              eventEl.setAttribute("data-end", info.event.end.toISOString());
+          //       // 2. Recreate DOM element for sidebar
+          //       const eventEl = document.createElement("div");
+          //       eventEl.innerText = info.event.title;
+          //       eventEl.className =
+          //         "fc-event cursor-move rounded bg-blue-500 px-2 py-1 text-white mb-2";
+          //       eventEl.setAttribute("data-title", info.event.title);
+          //       eventEl.setAttribute(
+          //         "data-start",
+          //         info.event.start.toISOString()
+          //       );
+          //       eventEl.setAttribute("data-end", info.event.end.toISOString());
 
-              sidebar.appendChild(eventEl);
+          //       sidebar.appendChild(eventEl);
 
-              // 3. Re-init draggable on the new element
-              new Draggable(sidebar, {
-                itemSelector: ".fc-event",
-                eventData: function (eventEl) {
-                  return {
-                    title: eventEl.getAttribute("data-title"),
-                    start: eventEl.getAttribute("data-start"),
-                    end: eventEl.getAttribute("data-end"),
-                  };
-                },
-              });
-            } else {
-              const el = info.draggedEl;
-
-              // Override with original times
-              info.event.setStart(el.getAttribute("data-start"));
-              info.event.setEnd(el.getAttribute("data-end"));
-            }
-          }}
+          //       // 3. Re-init draggable on the new element
+          //       new Draggable(sidebar, {
+          //         itemSelector: ".fc-event",
+          //         eventData: function (eventEl) {
+          //           return {
+          //             title: eventEl.getAttribute("data-title"),
+          //             start: eventEl.getAttribute("data-start"),
+          //             end: eventEl.getAttribute("data-end"),
+          //           };
+          //         },
+          //       });
+          //     } else {
+          //       const el = info.draggedEl;
+          //       // Override with original times
+          //       info.event.setStart(el.getAttribute("data-start"));
+          //       info.event.setEnd(el.getAttribute("data-end"));
+          //     }
+          //   }}
         />
       </div>
     </div>
