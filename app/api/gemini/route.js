@@ -36,7 +36,15 @@ export async function POST(request) {
         );
       }
       prompt =
-        "Please parse this to find all the course names and codes: " + pdfText;
+      "This is a parsed link that contains all the major qualification courses for the student. " +
+      "Return the courses codes and their course names as an array. Your response is being retruend as a json object, " +
+      "so please be mindful of this and do not create any sort of disruptive writing or formatting. " +
+      "I just need your response as an array of taken class codes (e.g., CSE20, BIO120, etc.) as a comma-separated list, " +
+      "and some additional class information, like credit number and the number of electives a student needs to take. " + 
+      "Along with that, I want you to make the list of the classes that are ELECTIVES in an array [ ]. Here is my structure idea: " +
+      "All classes = [all classes ]" + 
+      "courses: { class: {code, name, credits} class: {code, name, credits}.... number of electives to take: (number) electives: (electives array) }" +
+      pdfText;
     }
     console.log("reust type:", requestType);
     const geminiResponse = await sendTxtAndPrompt(prompt);
