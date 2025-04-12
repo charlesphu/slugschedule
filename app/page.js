@@ -1,19 +1,23 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { sendPrompt } from "./hooks/aiPrompt";
+import { usePDFToText } from "./hooks/usePDFToText";
 
 export default function Home() {
   const [fileName, setFileName] = React.useState("No transcript selected");
+  const fileInputRef = useRef(null);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       setFileName(file.name);
+
+      const pdfURL = URL.createObjectURL(file);
+      const pdfText = usePDFToText(pdfURL);
+      console.log("PDF Text: ", pdfText);
     }
   };
-
-  const fileInputRef = React.useRef(null);
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
