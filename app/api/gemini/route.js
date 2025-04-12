@@ -2,12 +2,12 @@ import { sendTxtAndPrompt } from "./utils/geminiHelper";
 
 export async function POST(request) {
   try {
-    const { requestType, pdfText } = await request.json();
+    const { requestType, content } = await request.json();
     console.log("im here");
     let prompt = null;
 
-    if (requestType == "pdf") {
-      if (!pdfText) {
+    if (requestType == "transcript") {
+      if (!content) {
         return new Response(
           JSON.stringify({ success: false, error: "PDF text is required." }),
           { status: 400, headers: { "Content-Type": "application/json" } }
@@ -29,7 +29,7 @@ export async function POST(request) {
         pdfText;
     } else if (requestType == "majorRequirements") {
       console.log("request type:" +request);
-      if (!pdfText) {
+      if (!content) {
         return new Response(
           JSON.stringify({ success: false, error: "URL text is required." }),
           { status: 400, headers: { "Content-Type": "application/json" } }
