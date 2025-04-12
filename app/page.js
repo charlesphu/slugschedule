@@ -2,7 +2,6 @@
 
 import React, { useState, useRef } from "react";
 import { usePDFToText } from "./hooks/usePDFToText";
-import { webscrape } from "./hooks/webscrape";
 
 export default function Home() {
   const [fileName, setFileName] = React.useState("No transcript selected");
@@ -14,12 +13,13 @@ export default function Home() {
       setFileName(file.name);
 
       const pdfURL = URL.createObjectURL(file);
-      const pdfText = await usePDFToText(pdfURL);
-      // console.log("PDF Text: ", pdfText);
-      let prompt =
-        pdfText + "get all the classes i have taken from this transcript";
-      console.log("Prompt: ", prompt);
-      sendPrompt(prompt);
+      try {
+        const pdfText = await usePDFToText(pdfURL); 
+        console.log("Extracted PDF Text:", pdfText);
+        handleTestAI(pdfText); 
+      } catch (error) {
+        console.error("Error extracting text from PDF:", error);
+      }
     }
   };
 
@@ -27,18 +27,29 @@ export default function Home() {
     fileInputRef.current.click();
   };
 
-  const handleTestAI = async () => {
+  const handleTestAI = async (pdfText) => {
+    console.log("PDF Text to send:", pdfText);
     try {
       const response = await fetch("/api/gemini", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ prompt: "This is a hardcoded prompt." }), // Hardcoded prompt
+        body: JSON.stringify({ 
+          pdfText,
+          requestType: "pdf",
+         }), 
+      
       });
 
+      console.log("passed data:", pdfText);
       const data = await response.json();
-      console.log("Gemini's Responswwwe:", data);
+      const geminiResponseJSON = data.data;
+       /*** ^^^^^^^^^^^
+       * THIS VARIABLE RIGHT HERE IS THE RETURNED ARRAY OF CLASSES FROM GEMINI 
+       ***/
+      
+
     } catch (error) {
       console.error("Error calling the API:", error);
     }
@@ -62,13 +73,6 @@ export default function Home() {
       </button>
 
       <p>{fileName}</p>
-
-      <button
-        onClick={handleTestAI} // Call the new function
-        className="rounded bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-700"
-      >
-        Test AI
-      </button>
     </div>
   );
 }
