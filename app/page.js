@@ -8,14 +8,18 @@ export default function Home() {
   const [fileName, setFileName] = React.useState("No transcript selected");
   const fileInputRef = useRef(null);
 
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
       setFileName(file.name);
 
       const pdfURL = URL.createObjectURL(file);
-      const pdfText = usePDFToText(pdfURL);
-      console.log("PDF Text: ", pdfText);
+      const pdfText = await usePDFToText(pdfURL);
+      // console.log("PDF Text: ", pdfText);
+      let prompt =
+        pdfText + "get all the classes i have taken from this transcript";
+      console.log("Prompt: ", prompt);
+      sendPrompt(prompt);
     }
   };
 

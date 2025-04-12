@@ -9,7 +9,7 @@ export async function POST(request) {
     model: "gemini-2.0-flash",
     contents: prompt,
   });
-  console.log(response.text);
+  // console.log(response.text);
   return new Response(JSON.stringify({ response: response.text }), {
     status: 200,
     headers: { "Content-Type": "application/json" },
