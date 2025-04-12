@@ -1,7 +1,91 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDropzone } from "react-dropzone";
+import { usePDFToText } from "../hooks/usePDFToText";
 
+function UploadArea() {
+  const [isFileUploading, setIsFileUploading] = useState(false);
+  const [isFileUploaded, setIsFileUploaded] = useState(false);
+
+  const onDrop = async (acceptedFiles) => {
+    setIsFileUploading(true);
+
+    const file = acceptedFiles[0];
+    const pdfURL = URL.createObjectURL(file);
+    const pdfText = usePDFToText(pdfURL);
+
+    // send pdf to API
+    console.log(pdfText);
+
+    setIsFileUploaded(true);
+    setIsFileUploading(false);
+  };
+
+  const { getRootProps, getInputProps, open, isDragActive } = useDropzone({
+    onDrop,
+    multiple: false,
+    accept: {
+      "application/pdf": [],
+    },
+    maxSize: 5242880,
+    disabled: isFileUploading || isFileUploaded,
+  });
+
+  const [isDragHovered, setIsDragHovered] = useState(isDragActive);
+  useEffect(() => {
+    if (isDragActive) {
+      setIsDragHovered(true);
+    } else {
+      // Add a small delay before setting isDragHovered to false
+      // This prevents flickering when user is moving the file around
+      setTimeout(() => {
+        setIsDragHovered(false);
+      }, 100); // 150ms delay
+    }
+  }, [isDragActive]);
+
+  return (
+    <div
+      className="flex h-60 cursor-pointer flex-col items-center justify-center rounded-md border-4 border-dashed border-[var(--text-primary)] bg-[var(--container-secondary)] p-2"
+      {...getRootProps()}
+      onClick={() => {
+        if (!isFileUploading || isFileUploaded) {
+          open();
+        }
+      }}>
+      <input
+        {...getInputProps()}
+        disabled={isFileUploading || isFileUploaded}
+      />
+      {isFileUploaded ? (
+        <p
+          className="text-center text-3xl font-bold text-[var(--text-primary)] select-none"
+          style={{
+            scale: 1,
+          }}>
+          Transcript Received
+        </p>
+      ) : (
+        <>
+          <p
+            className="text-center text-3xl font-bold text-[var(--text-primary)] select-none"
+            style={{
+              scale: isDragHovered ? 1.3 : 1,
+              transition: "scale 0.1s ease-in-out",
+            }}>
+            {isDragHovered ? "Drop file here..." : "Upload your Transcript"}
+          </p>
+          {!isDragHovered && (
+            <p className="text-center text-xl text-[var(--text-primary)] select-none">
+              Drag and Drop or <span className="underline">Click Here</span>
+            </p>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
 export default function UploadForm() {
   const [isHoveringUpload, setIsHoveringUpload] = useState(false);
 
@@ -28,15 +112,7 @@ export default function UploadForm() {
         />
       </div>
 
-      {/* Upload Form */}
-      <div className="flex h-60 cursor-pointer flex-col items-center justify-center rounded-md border-4 border-dashed border-[var(--text-primary)] bg-[var(--container-secondary)] p-2">
-        <p className="text-center text-3xl font-bold text-[var(--text-primary)]">
-          Upload your Transcript
-        </p>
-        <p className="text-center text-xl text-[var(--text-primary)]">
-          Drag and Drop or <span className="underline">Click Here</span>
-        </p>
-      </div>
+      <UploadArea />
     </section>
   );
 }
