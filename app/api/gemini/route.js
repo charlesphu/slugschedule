@@ -5,7 +5,6 @@ export async function POST(request) {
     const { requestType, pdfText } = await request.json();
     console.log("im here");
     let prompt = null;
-
     if (requestType == "pdf") {
       if (!pdfText) {
         return new Response(
@@ -27,6 +26,7 @@ export async function POST(request) {
         "Current Major: (student major, please make it read and casual, no shorthand language. Like: Computer Science, Biology) " +
         "Short words: (max 20 words) of encouragement based off recently taken classes: (Encouragement)" +
         pdfText;
+      
     } else if (requestType == "majorRequirements") {
       console.log("request type:" +request);
       if (!pdfText) {
@@ -45,8 +45,10 @@ export async function POST(request) {
       "All classes = [all classes ]" + 
       "courses: { class: {code, name, credits} class: {code, name, credits}.... number of electives to take: (number) electives: (electives array) }" +
       pdfText;
-    }
+    } 
     console.log("reust type:", requestType);
+    console.log(requestType, pdfText);
+    console.log("prompt:", prompt);
     const geminiResponse = await sendTxtAndPrompt(prompt);
 
     return new Response(JSON.stringify(geminiResponse), {

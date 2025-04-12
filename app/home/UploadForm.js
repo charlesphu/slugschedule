@@ -13,16 +13,30 @@ function UploadArea() {
 
     const file = acceptedFiles[0];
     const pdfURL = URL.createObjectURL(file);
-    const pdfText = usePDFToText(pdfURL);
-
-    // send pdf to API
+    const pdfText = await usePDFToText(pdfURL);
+    try {
     console.log(pdfText);
-
-    setIsFileUploaded(true);
-    setIsFileUploading(false);
+    const response = await fetch("/api/gemini", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        pdfText,
+        requestType: "pdf",
+      }),
+    });
+    const data = await response.json();
+    console.log("Transcript data: ", data);
+  } catch (error) {
+    console.error("Error:", error);
+    } finally {
+      setIsFileUploaded(true);
+      setIsFileUploading(false);
+    }
   };
-
-  const { getRootProps, getInputProps, open, isDragActive } = useDropzone({
+  
+    const { getRootProps, getInputProps, open, isDragActive } = useDropzone({
     onDrop,
     multiple: false,
     accept: {
