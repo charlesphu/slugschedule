@@ -3,6 +3,7 @@ import { sendTxtAndPrompt } from "./utils/geminiHelper";
 export async function POST(request) {
   try {
     const { requestType, pdfText } = await request.json();
+    console.log("im here");
     let prompt = null;
 
     if (requestType == "pdf") {
@@ -13,14 +14,14 @@ export async function POST(request) {
         );
       }
       prompt =
-        "This is a pdf that is the transcript of a student. Please parse the pdf for all of the classes that have been taken by a user, and return it in your response as an array. Your response is being returned as a json object so please be mindful of this and do not create any sort of disruptive writing or formatting. I just need your response as an array of taken class codes (e.g., CSE20, BIO120, etc.) as a comma-separated list. " +
+        "This is a pdf that is the transcript of a student. Please parse the pdf for all of the classes that have been taken by a user, and return it in your response as an array. Your response is being returned as data that will be needed so please be mindful of this and do not create any sort of disruptive writing or formatting or weird symbols. I just need your response as an array of taken class codes (e.g., CSE20, BIO120, etc.) as a comma-separated list. " +
         pdfText;
     } else if (request == "majorRequirements") {
       let urlText = null;
       prompt =
         "Please parse this to find all the course names and codes: " + urlText;
     }
-
+    console.log("reust type:", requestType);
     const geminiResponse = await sendTxtAndPrompt(prompt);
 
     return new Response(JSON.stringify(geminiResponse), {

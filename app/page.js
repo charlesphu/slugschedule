@@ -14,9 +14,9 @@ export default function Home() {
 
       const pdfURL = URL.createObjectURL(file);
       try {
-        const pdfText = await usePDFToText(pdfURL); // Use usePDFToText to extract text
+        const pdfText = await usePDFToText(pdfURL); 
         console.log("Extracted PDF Text:", pdfText);
-        handleTestAI(pdfText); // Pass the extracted text to handleTestAI
+        handleTestAI(pdfText); 
       } catch (error) {
         console.error("Error extracting text from PDF:", error);
       }
@@ -28,17 +28,26 @@ export default function Home() {
   };
 
   const handleTestAI = async (pdfText) => {
+    console.log("PDF Text to send:", pdfText);
     try {
       const response = await fetch("/api/gemini", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ pdfText }), // Send the extracted PDF text
+        body: JSON.stringify({ 
+          pdfText,
+          requestType: "pdf",
+         }), 
+      
       });
 
+      console.log("passed data:", pdfText);
       const data = await response.json();
-      console.log("Gemini's Response:", data); // Log the response from the server
+       /*** ^^^^^^^^^^^
+       * THIS VARIABLE RIGHT HERE IS THE RETURNED ARRAY OF CLASSES FROM GEMINI 
+       ***/
+      console.log("Gemini's Responseeeee:", data);
     } catch (error) {
       console.error("Error calling the API:", error);
     }
