@@ -16,17 +16,18 @@ export default function ClassOptions({ classes = [] }) {
           scrollbarColor: "var(--text-primary) var(--container-primary)",
           transition: "all 0.2s ease-in-out",
         }}>
-        {classes.map((courseData, index) => {
-          if (courseData.hidden) return null; // Skip hidden courses
-          if (!isShowingAll && index >= MAX_DEFAULT_COURSES) return null; // Limit when not showing all
-          return (
-            <CourseItem
-              key={index}
-              courseName={courseData.code}
-              isRecommended={index < 2} // First two are recommended
-            />
-          );
-        })}
+        {classes
+          .filter((courseData) => !courseData.hidden)
+          .map((courseData, index) => {
+            if (!isShowingAll && index >= MAX_DEFAULT_COURSES) return null; // Limit when not showing all
+            return (
+              <CourseItem
+                key={index}
+                courseName={courseData.code}
+                isRecommended={index < 2} // First two are recommended
+              />
+            );
+          })}
       </div>
 
       {/* Show All Button */}
