@@ -5,9 +5,37 @@
   --container-primary: #fdfae2;
   --container-secondary: #f8edd0;
   --text-primary: #cca57a;
+
+  --fc-border-color: var(
+    --text-primary
+  ); /* Override FullCalendar border color */
 }
 
 body {
   background: var(--background);
   font-family: "Cabin", sans-serif;
+}
+
+/* Removes title from FullCalender component */
+.fc .fc-toolbar {
+  display: none;
+}
+
+/* Set custom styles */
+.fc {
+  font-family: "Cabin", sans-serif;
+}
+
+.fc .fc-timegrid-slot {
+  color: var(--text-primary) !important;
+  border: 1px dashed var(--container-secondary) !important;
+}
+
+.fc .fc-col-header-cell {
+  color: var(--text-primary) !important;
+  border: 1px solid var(--text-primary) !important;
+}
+
+.fc .fc-scrollgrid {
+  border-radius: 5px;
 }
