@@ -519,7 +519,8 @@ function Container({
         </h3>
         {/* Underscore */}
         <div
-          className={`w-[${underscoreWidth}] h-1.5 rounded-md bg-[var(--container-secondary)]`}></div>
+          className="h-1.5 rounded-md bg-[var(--container-secondary)]"
+          style={{ width: underscoreWidth }}></div>
       </div>
 
       {/* Container Content */}
