@@ -66,5 +66,11 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 🙏 Acknowledgments
 
-- Cruzhacks
-- https://github.com/cabalex
+### The Team:
+
+- **Andy Kuang** - Frontend & UX Design
+- **Charles Phu** - Backend & Webscraper
+- **Ashwin Vinod** - Backend & Gemini
+- **Alaaddin Ghosheh** - Backend & Gemini
+
+Special thanks to the CruzHacks 2025 organizing team for hosting an amazing hackathon that made this project possible
