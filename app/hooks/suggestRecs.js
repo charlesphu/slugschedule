@@ -1,5 +1,4 @@
 export async function suggestRecs(takenClasses) {
-  console.log("received res:", takenClasses);
   try {
     const response = await fetch("/api/gemini", {
       method: "POST",

@@ -26,7 +26,6 @@ export async function POST(request) {
         "Current Major: (student major, please make it read and casual, no shorthand language. Like: Computer Science, Biology) " +
         "Short words: (max 20 words) of encouragement based off recently taken classes: (Encouragement)" +
         content;
-        console.log("pdf content:", content);
     } else if (requestType == "majorRequirements") {
       if (!content) {
         return new Response(
@@ -46,7 +45,7 @@ export async function POST(request) {
         content;
     } else if (requestType == "rankings") {
       prompt =
-      /*  "This is JSON data for classes that are being offered in the current academic quarter that a student is able to take " +
+        /*  "This is JSON data for classes that are being offered in the current academic quarter that a student is able to take " +
         "Please reearange the JSON data in order from highest to lowest ranking." +
         "please be mindful that this response will be treated as a JSON object so do not return anything other than a JSON object. Do not drop any existing attributes such as class schedule, every index must have them. Please add an attribute for the top 5 positions to imply it is a 'reccomended' course. such as reccomended: true, only" +
         "for the top 5 classes. Here is the JSON data. " +
@@ -60,16 +59,13 @@ export async function POST(request) {
         "This is the JSON data for classes that are being offered; " +
         JSON.stringify(content) +
         "Please rearrange this data in order from highest to lowest ranking." +
-        "You must just return the JSON data provided rearranged with the new attribute for the top 5."
-        "Only return values from the existing JSON data. Structure the JSON as such:" +
-        "Code: string"+
-        "Time: (such as TuTh 10:00-11:30)"+
+        "You must just return the JSON data provided rearranged with the new attribute for the top 5.";
+      "Only return values from the existing JSON data. Structure the JSON as such:" +
+        "Code: string" +
+        "Time: (such as TuTh 10:00-11:30)" +
         "name: string";
-        console.log("Prompt:", prompt);
-
     }
     const geminiResponse = await sendTxtAndPrompt(prompt);
-    
 
     return new Response(JSON.stringify(geminiResponse), {
       status: 200,
