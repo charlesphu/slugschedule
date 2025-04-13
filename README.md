@@ -1,6 +1,6 @@
 # Slug Scheduler
 
-An intelligent class scheduling assistant for UC Santa Cruz students that helps create the perfect schedule in minutes.
+A smart scheduling assistant for UC Santa Cruz students that creates recommended class schedules in minutes. Upload your transcript to analyze academic progress, generate schedules based on major requirements, and visualize your courses in an interactive calendar interface!
 
 ## 🎯 Features
 
@@ -8,7 +8,15 @@ An intelligent class scheduling assistant for UC Santa Cruz students that helps 
 - **Smart Schedule Generation**: Creates optimized class schedules based on your major requirements
 - **Interactive Calendar**: Visualize and modify your class schedule with an intuitive drag-and-drop interface
 - **Major Requirements Integration**: Automatically checks degree requirements against UCSC's course catalog
-- **Web Scraping**: Pulls real-time course data from UCSC's class search
+- **Web Scraping**: Pulls course data from UCSC's class search and major websites
+
+## 📸 Screenshots
+
+![Home Page](public/screenshots/Home.png)
+_Friendly landing page for users to upload their university transcript_
+
+![Calendar View](public/screenshots/Schedule.png)
+_Calendar view with course recommendations for easy scheduling_
 
 ## 🚀 Tech Stack
 
@@ -52,11 +60,17 @@ npm run dev
 - `npm run dev`: Starts development server with Turbopack
 - `npm run build`: Creates production build
 
+## 🙏 Acknowledgments
+
+### The Team:
+
+- **Andy Kuang** - Frontend & UX Design
+- **Charles Phu** - Backend & Webscraper
+- **Ashwin Vinod** - Backend & Gemini
+- **Alaaddin Ghosheh** - Backend & Gemini
+
+Special thanks to the CruzHacks 2025 organizing team for hosting an amazing hackathon that made this project possible
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 🙏 Acknowledgments
-
-- Cruzhacks
-- https://github.com/cabalex
