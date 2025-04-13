@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { UserDataContext } from "../layout";
-import useRemainingClasses from "../hooks/useRemainingClasses";
+import fetchRemainingClasses from "../hooks/fetchRemainingClasses";
 
 import { DndContext } from "@dnd-kit/core";
 
@@ -132,7 +132,7 @@ export default function CalendarPage() {
     ) {
       router.push("/");
     } else {
-      useRemainingClasses(userDataContext.transcriptData.classes)
+      fetchRemainingClasses(userDataContext.transcriptData.classes)
         .then((res) => {
           // Ensure res is an array before setting state
           setRemainingClasses(res);
