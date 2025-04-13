@@ -129,6 +129,8 @@ export default function CalendarPage() {
   const userDataContext = useContext(UserDataContext);
   const router = useRouter();
 
+  const [isLoadingRecommendation, setIsLoadingRecommendation] = useState(false);
+
   useEffect(() => {
     if (
       !userDataContext ||
@@ -137,6 +139,7 @@ export default function CalendarPage() {
     ) {
       router.push("/");
     } else {
+      setIsLoadingRecommendation(true);
       fetchRemainingClasses(userDataContext.transcriptData.classes)
         .then((res) => {
           // setRemainingClasses(res);
@@ -152,6 +155,7 @@ export default function CalendarPage() {
                 }
               });
 
+              setIsLoadingRecommendation(false);
               setRemainingClasses(parsedData);
             } catch (error) {
               console.error(
@@ -256,7 +260,10 @@ export default function CalendarPage() {
       {/* Content */}
       <div className="relative z-1 flex h-screen w-full items-center justify-center gap-12 pt-20">
         <DndContext id="calendar-dnd" onDragEnd={handleDragEnd}>
-          <ClassOptions classes={remainingClasses} />
+          <ClassOptions
+            classes={remainingClasses}
+            loading={isLoadingRecommendation}
+          />
           <ClassSchedule
             calendarEvents={events}
             handleRemoveEvent={removeCourseFromCalendar}

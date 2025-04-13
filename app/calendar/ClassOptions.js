@@ -5,11 +5,16 @@ import Container from "./Container";
 
 const MAX_DEFAULT_COURSES = 4;
 
-export default function ClassOptions({ classes = [] }) {
+export default function ClassOptions({ classes = [], loading = false }) {
   const [isShowingAll, setIsShowingAll] = useState(false);
 
   return (
     <Container title={"Class Options"}>
+      {loading && (
+        <div className="flex h-full w-full items-center justify-center">
+          <div className="mt-5 h-10 w-10 animate-spin rounded-full border-4 border-[var(--text-primary)] border-t-transparent"></div>
+        </div>
+      )}
       <div
         className={`flex max-h-[50vh] gap-4 ${isShowingAll ? "grid grid-cols-2 overflow-x-hidden overflow-y-auto pt-1.5 pr-2" : "flex-col"}`}
         style={{
