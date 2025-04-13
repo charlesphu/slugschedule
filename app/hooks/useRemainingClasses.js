@@ -1,5 +1,5 @@
 export default async function useRemainingClasses(classesTaken) {
-  const response = await fetch("./cseClasses.json");
+  const response = await fetch("/cseClasses.json");
   const jsonData = await response.json();
   const allClasses = jsonData.classes;
 
