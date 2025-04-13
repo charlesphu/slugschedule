@@ -14,7 +14,6 @@ An intelligent class scheduling assistant for UC Santa Cruz students that helps 
 
 - **Framework**: [Next.js 15.3.0](https://nextjs.org/)
 - **UI Components**:
-  - [FullCalendar](https://fullcalendar.io/) for schedule visualization
   - [DND Kit](https://dndkit.com/) for drag-and-drop functionality
   - [Tailwind CSS](https://tailwindcss.com/) for styling
 - **AI Integration**: Google's [Gemini AI API](https://ai.google.dev/) for transcript analysis
