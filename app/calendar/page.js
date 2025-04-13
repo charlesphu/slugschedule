@@ -318,11 +318,21 @@ export default function CalendarPage() {
   const [events, setEvents] = useState([]);
   const [remainingClasses, setRemainingClasses] = useState([]);
 
-  const classesTaken = useContext(UserDataContext).transcriptData.classes;
+  const userDataContext = useContext(UserDataContext);
+  const router = useRouter();
+
+  if (
+    !userDataContext ||
+    !userDataContext.transcriptData ||
+    !userDataContext.transcriptData.className
+  ) {
+    return router.push("/");
+  }
 
   useEffect(() => {
     useRemainingClasses(classesTaken).then((res) => {
       setRemainingClasses(res);
+      console.log(res);
     });
   }, []);
 
