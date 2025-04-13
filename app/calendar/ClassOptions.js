@@ -9,9 +9,7 @@ export default function ClassOptions({ classes = [] }) {
   const [isShowingAll, setIsShowingAll] = useState(false);
 
   return (
-    <Container
-      title={"Class Options"}
-      underscoreWidth={isShowingAll ? "50%" : "100%"}>
+    <Container title={"Class Options"}>
       <div
         className={`flex max-h-[50vh] gap-4 ${isShowingAll ? "grid grid-cols-2 overflow-x-hidden overflow-y-auto pt-1.5 pr-2" : "flex-col"}`}
         style={{

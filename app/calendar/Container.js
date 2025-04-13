@@ -4,7 +4,6 @@ export default function Container({
   title,
   className,
   children,
-  underscoreWidth = "60%",
   onMouseEnter,
   onMouseLeave,
 }) {
@@ -21,10 +20,6 @@ export default function Container({
         <h3 className="text-2xl font-bold text-[var(--text-primary)]">
           {title}
         </h3>
-        {/* Underscore */}
-        <div
-          className="h-1.5 rounded-md bg-[var(--container-tertiary)]"
-          style={{ width: underscoreWidth }}></div>
       </div>
 
       {/* Container Content */}
