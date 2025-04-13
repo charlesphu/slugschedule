@@ -57,11 +57,11 @@ export default function ClassSchedule({ calendarEvents = [] }) {
           eventContent={(eventInfo) => {
             return (
               <div className="h-full overflow-hidden p-1">
-                <div className="text-sm font-medium">
+                <div className="truncate text-sm font-medium">
                   {eventInfo.event.title}
                 </div>
                 {eventInfo.event.extendedProps.location && (
-                  <div className="truncate text-xs opacity-70">
+                  <div className="truncate text-xs text-ellipsis opacity-70">
                     {eventInfo.event.extendedProps.location}
                   </div>
                 )}
