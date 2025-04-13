@@ -333,7 +333,8 @@ export default function CalendarPage() {
       useRemainingClasses(userDataContext.transcriptData.classes)
         .then((res) => {
           // Ensure res is an array before setting state
-          setRemainingClasses(Array.isArray(res) ? res : []);
+          setRemainingClasses(res);
+          console.log(res);
         })
         .catch((err) => {
           console.error("Error fetching remaining classes:", err);
