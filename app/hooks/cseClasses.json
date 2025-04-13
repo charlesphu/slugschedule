@@ -1,0 +1,709 @@
+{
+  "metadata": {
+    "totalClasses": 54
+  },
+  "classes": [
+    {
+      "code": "CSE 3 - 01",
+      "name": "Comp Tech in Society",
+      "schedule": {
+        "dayAndTime": "TuTh 11:40AM-01:15PM",
+        "location": "LEC: Earth&Marine B206",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 110,
+        "capacity": 150
+      }
+    },
+    {
+      "code": "CSE 13S - 02",
+      "name": "Comp Sys and C Prog",
+      "schedule": {
+        "dayAndTime": "MWF 01:20PM-02:25PM",
+        "location": "LEC: J Baskin Engr 152",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 119,
+        "capacity": 130
+      }
+    },
+    {
+      "code": "CSE 13S - 03",
+      "name": "Comp Sys and C Prog",
+      "schedule": {
+        "dayAndTime": "TuTh 08:00AM-09:35AM",
+        "location": "LEC: Oakes Acad 105",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 28,
+        "capacity": 60
+      }
+    },
+    {
+      "code": "CSE 20 - 02",
+      "name": "Beginning Python",
+      "schedule": {
+        "dayAndTime": "TuTh 03:20PM-04:55PM",
+        "location": "LEC: Earth&Marine B206",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 117,
+        "capacity": 120
+      }
+    },
+    {
+      "code": "CSE 40 - 01",
+      "name": "ML Basics",
+      "schedule": {
+        "dayAndTime": "TuTh 11:40AM-01:15PM",
+        "location": "LEC: J Bask Aud 101",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 173,
+        "capacity": 180
+      }
+    },
+    {
+      "code": "CSE 80N - 01",
+      "name": "Intro to Networking",
+      "schedule": {
+        "dayAndTime": "MWF 01:20PM-02:25PM",
+        "location": "LEC: Kresge Acad 3201",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 36,
+        "capacity": 60
+      }
+    },
+    {
+      "code": "CSE 101 - 01",
+      "name": "Data Structs & Algs",
+      "schedule": {
+        "dayAndTime": "TuTh 07:10PM-08:45PM",
+        "location": "LEC: Thim Lecture 003",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 176,
+        "capacity": 180
+      }
+    },
+    {
+      "code": "CSE 101 - 02",
+      "name": "Data Structs & Algs",
+      "schedule": {
+        "dayAndTime": "TuTh 08:00AM-09:35AM",
+        "location": "LEC: Earth&Marine B206",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 105,
+        "capacity": 120
+      }
+    },
+    {
+      "code": "CSE 101P - 01",
+      "name": "Data Strct&Algs Python",
+      "schedule": {
+        "dayAndTime": "TuTh 03:20PM-04:55PM",
+        "location": "LEC: Steven Acad 150",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 15,
+        "capacity": 30
+      }
+    },
+    {
+      "code": "CSE 103 - 01",
+      "name": "Computational Models",
+      "schedule": {
+        "dayAndTime": "MWF 04:00PM-05:05PM",
+        "location": "LEC: Earth&Marine B206",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 263,
+        "capacity": 268
+      }
+    },
+    {
+      "code": "CSE 105 - 01",
+      "name": "Modern Algor Toolbox",
+      "schedule": {
+        "dayAndTime": "TuTh 09:50AM-11:25AM",
+        "location": "LEC: R Carson Acad 240",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 37,
+        "capacity": 60
+      }
+    },
+    {
+      "code": "CSE 107 - 01",
+      "name": "Probability/Stats",
+      "schedule": {
+        "dayAndTime": "TuTh 05:20PM-06:55PM",
+        "location": "LEC: Thim Lecture 003",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 166,
+        "capacity": 185
+      }
+    },
+    {
+      "code": "CSE 109 - 01",
+      "name": "Quantum Computing",
+      "schedule": {
+        "dayAndTime": "MW 05:20PM-06:55PM",
+        "location": "LEC: Porter Acad 148",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 54,
+        "capacity": 60
+      }
+    },
+    {
+      "code": "CSE 110A - 01",
+      "name": "Fund Compiler Des 1",
+      "schedule": {
+        "dayAndTime": "TuTh 05:20PM-06:55PM",
+        "location": "LEC: Steven Acad 175",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 86,
+        "capacity": 90
+      }
+    },
+    {
+      "code": "CSE 115A - 01",
+      "name": "Intro Software Eng",
+      "schedule": {
+        "dayAndTime": "MWF 08:00AM-09:05AM",
+        "location": "LEC: J Bask Aud 101",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 145,
+        "capacity": 150
+      }
+    },
+    {
+      "code": "CSE 115C - 01",
+      "name": "Software Design II",
+      "schedule": {
+        "dayAndTime": "TuTh 08:00AM-09:35AM",
+        "location": "LEC: J Baskin Engr 152",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 103,
+        "capacity": 110
+      }
+    },
+    {
+      "code": "CSE 120 - 02",
+      "name": "Computer Architect",
+      "schedule": {
+        "dayAndTime": "MWF 09:20AM-10:25AM",
+        "location": "LEC: Kresge Acad 3201",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 136,
+        "capacity": 145
+      }
+    },
+    {
+      "code": "CSE 123B - 01",
+      "name": "Engr Design Proj II",
+      "schedule": {
+        "dayAndTime": "TuTh 11:40AM-01:15PM",
+        "location": "LAB: Soc Sci 1 110",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 25,
+        "capacity": 30
+      }
+    },
+    {
+      "code": "CSE 130 - 01",
+      "name": "Prin Comp Sys Dsgn",
+      "schedule": {
+        "dayAndTime": "MWF 09:20AM-10:25AM",
+        "location": "LEC: Humn Lecture Hall",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 179,
+        "capacity": 180
+      }
+    },
+    {
+      "code": "CSE 130 - 02",
+      "name": "Prin Comp Sys Dsgn",
+      "schedule": {
+        "dayAndTime": "TuTh 11:40AM-01:15PM",
+        "location": "LEC: Thim Lecture 003",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 78,
+        "capacity": 120
+      }
+    },
+    {
+      "code": "CSE 134 - 01",
+      "name": "Embedded OS",
+      "schedule": {
+        "dayAndTime": "MW 07:10PM-08:45PM",
+        "location": "LEC: PhysSciences 114",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 64,
+        "capacity": 75
+      }
+    },
+    {
+      "code": "CSE 138 - 01",
+      "name": "Distributed Systems",
+      "schedule": {
+        "dayAndTime": "TuTh 01:30PM-03:05PM",
+        "location": "LEC: Soc Sci 1 110",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 59,
+        "capacity": 60
+      }
+    },
+    {
+      "code": "CSE 142 - 01",
+      "name": "Machine Learning",
+      "schedule": {
+        "dayAndTime": "MWF 10:40AM-11:45AM",
+        "location": "LEC: J Baskin Engr 152",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 136,
+        "capacity": 140
+      }
+    },
+    {
+      "code": "CSE 146 - 01",
+      "name": "Ethics & Algorithms",
+      "schedule": {
+        "dayAndTime": "TuTh 05:20PM-06:55PM",
+        "location": "LEC: Thim Lecture 001",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 88,
+        "capacity": 100
+      }
+    },
+    {
+      "code": "CSE 151 - 01",
+      "name": "Adv Computer Net",
+      "schedule": {
+        "dayAndTime": "TuTh 05:20PM-06:55PM",
+        "location": "LEC: Merrill Acad 102",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 67,
+        "capacity": 100
+      }
+    },
+    {
+      "code": "CSE 151L - 01",
+      "name": "Adv Computer Net Lab",
+      "schedule": {
+        "dayAndTime": "Not specified",
+        "location": "LAB: TBD In Person",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 67,
+        "capacity": 100
+      }
+    },
+    {
+      "code": "CSE 156 - 01",
+      "name": "Network Programming",
+      "schedule": {
+        "dayAndTime": "MW 05:20PM-06:55PM",
+        "location": "LEC: Kresge Acad 3101",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 36,
+        "capacity": 50
+      }
+    },
+    {
+      "code": "CSE 156L - 01",
+      "name": "Network Progrm Lab",
+      "schedule": {
+        "dayAndTime": "Not specified",
+        "location": "LAB: TBD In Person",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 37,
+        "capacity": 50
+      }
+    },
+    {
+      "code": "CSE 157 - 01",
+      "name": "Internet of Things",
+      "schedule": {
+        "dayAndTime": "TuTh 01:30PM-03:05PM",
+        "location": "LEC: Engineer 2 192",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 39,
+        "capacity": 45
+      }
+    },
+    {
+      "code": "CSE 160 - 01",
+      "name": "Intro Comp Graphics",
+      "schedule": {
+        "dayAndTime": "MW 05:20PM-06:55PM",
+        "location": "LEC: Online",
+        "instructionMode": "Synchronous Online"
+      },
+      "enrollment": {
+        "enrolled": 158,
+        "capacity": 160
+      }
+    },
+    {
+      "code": "CSE 164 - 01",
+      "name": "Computer Vision",
+      "schedule": {
+        "dayAndTime": "TuTh 09:50AM-11:25AM",
+        "location": "LEC: Cowell Clrm 131",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 47,
+        "capacity": 58
+      }
+    },
+    {
+      "code": "CSE 183 - 01",
+      "name": "Web Applications",
+      "schedule": {
+        "dayAndTime": "TuTh 07:10PM-08:45PM",
+        "location": "LEC: Online",
+        "instructionMode": "Hybrid"
+      },
+      "enrollment": {
+        "enrolled": 118,
+        "capacity": 120
+      }
+    },
+    {
+      "code": "CSE 187 - 01",
+      "name": "Full Stack Web Dev II",
+      "schedule": {
+        "dayAndTime": "TuTh 03:20PM-04:55PM",
+        "location": "LEC: Steven Acad 175",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 55,
+        "capacity": 80
+      }
+    },
+    {
+      "code": "CSE 206G - 01",
+      "name": "Game Theory in CSE",
+      "schedule": {
+        "dayAndTime": "TuTh 11:40AM-01:15PM",
+        "location": "LEC: Merrill Acad 130",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 20,
+        "capacity": 30
+      }
+    },
+    {
+      "code": "CSE 209A - 01",
+      "name": "Modern Algor Toolbox",
+      "schedule": {
+        "dayAndTime": "TuTh 09:50AM-11:25AM",
+        "location": "LEC: R Carson Acad 240",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 37,
+        "capacity": 60
+      }
+    },
+    {
+      "code": "CSE 210A - 01",
+      "name": "Programming Languag",
+      "schedule": {
+        "dayAndTime": "MWF 02:40PM-03:45PM",
+        "location": "LEC: PhysSciences 110",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 75,
+        "capacity": 76
+      }
+    },
+    {
+      "code": "CSE 222B - 01",
+      "name": "VLSI Chip Design",
+      "schedule": {
+        "dayAndTime": "TuTh 01:30PM-03:05PM",
+        "location": "LEC: Merrill Acad 130",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 11,
+        "capacity": 30
+      }
+    },
+    {
+      "code": "CSE 225 - 01",
+      "name": "Asic Systems Design",
+      "schedule": {
+        "dayAndTime": "MWF 04:00PM-05:05PM",
+        "location": "LEC: Kresge Acad 3301",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 16,
+        "capacity": 30
+      }
+    },
+    {
+      "code": "CSE 228A - 01",
+      "name": "Agile Hardware Design",
+      "schedule": {
+        "dayAndTime": "TuTh 11:40AM-01:15PM",
+        "location": "LEC: N. Sci Annex 102",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 14,
+        "capacity": 30
+      }
+    },
+    {
+      "code": "CSE 231 - 01",
+      "name": "Adv Operating Systm",
+      "schedule": {
+        "dayAndTime": "MWF 09:20AM-10:25AM",
+        "location": "LEC: J Baskin Engr 156",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 23,
+        "capacity": 35
+      }
+    },
+    {
+      "code": "CSE 232 - 01",
+      "name": "Distributed Systems",
+      "schedule": {
+        "dayAndTime": "TuTh 01:30PM-03:05PM",
+        "location": "LEC: PhysSciences 130",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 36,
+        "capacity": 48
+      }
+    },
+    {
+      "code": "CSE 244C - 01",
+      "name": "Adv Computer Vision DL",
+      "schedule": {
+        "dayAndTime": "TuTh 11:40AM-01:15PM",
+        "location": "LEC: PhysSciences 140",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 27,
+        "capacity": 30
+      }
+    },
+    {
+      "code": "CSE 247 - 01",
+      "name": "Projects in AI",
+      "schedule": {
+        "dayAndTime": "TuTh 09:50AM-11:25AM",
+        "location": "LEC: PhysSciences 136",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 29,
+        "capacity": 40
+      }
+    },
+    {
+      "code": "CSE 247B - 01",
+      "name": "Projects in Comp Sci",
+      "schedule": {
+        "dayAndTime": "TuTh 03:20PM-04:55PM",
+        "location": "LEC: N. Sci Annex 103",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 19,
+        "capacity": 30
+      }
+    },
+    {
+      "code": "CSE 266A - 01",
+      "name": "Introduction to R",
+      "schedule": {
+        "dayAndTime": "TuTh 03:20PM-04:55PM",
+        "location": "LEC: Cowell Acad 216",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 8,
+        "capacity": 15
+      }
+    },
+    {
+      "code": "CSE 280N - 01",
+      "name": "Seminar On Networks",
+      "schedule": {
+        "dayAndTime": "Not specified",
+        "location": "SEM: TBD In Person",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 1,
+        "capacity": 10
+      }
+    },
+    {
+      "code": "CSE 280N - 02",
+      "name": "Seminar On Networks",
+      "schedule": {
+        "dayAndTime": "Not specified",
+        "location": "SEM: TBD In Person",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 8,
+        "capacity": 10
+      }
+    },
+    {
+      "code": "CSE 280O - 01",
+      "name": "Lang/Sys/Data Seminar",
+      "schedule": {
+        "dayAndTime": "Not specified",
+        "location": "SEM: TBD In Person",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 7,
+        "capacity": 15
+      }
+    },
+    {
+      "code": "CSE 280P - 01",
+      "name": "Parallel Processing",
+      "schedule": {
+        "dayAndTime": "Not specified",
+        "location": "SEM: TBD In Person",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 3,
+        "capacity": 7
+      }
+    },
+    {
+      "code": "CSE 280S - 01",
+      "name": "Seminar Comp Syst",
+      "schedule": {
+        "dayAndTime": "Not specified",
+        "location": "SEM: TBD In Person",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 3,
+        "capacity": 10
+      }
+    },
+    {
+      "code": "CSE 280V - 01",
+      "name": "Seminar:ComputrVision",
+      "schedule": {
+        "dayAndTime": "Not specified",
+        "location": "SEM: TBD In Person",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 6,
+        "capacity": 10
+      }
+    },
+    {
+      "code": "CSE 280X - 01",
+      "name": "Distributed Systems",
+      "schedule": {
+        "dayAndTime": "Not specified",
+        "location": "SEM: TBD In Person",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 0,
+        "capacity": 10
+      }
+    },
+    {
+      "code": "CSE 290C - 01",
+      "name": "Adv Machin Learning",
+      "schedule": {
+        "dayAndTime": "TuTh 01:30PM-03:05PM",
+        "location": "LEC: Steven Acad 152",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 10,
+        "capacity": 20
+      }
+    },
+    {
+      "code": "CSE 290Q - 01",
+      "name": "Topics in ProgLang",
+      "schedule": {
+        "dayAndTime": "MWF 09:20AM-10:25AM",
+        "location": "SEM: N. Sci Annex 102",
+        "instructionMode": "In Person"
+      },
+      "enrollment": {
+        "enrolled": 8,
+        "capacity": 25
+      }
+    }
+  ]
+}

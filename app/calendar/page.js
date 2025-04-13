@@ -1,11 +1,10 @@
 "use client";
-
+import { useContext } from "react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { UserDataContext } from "../layout";
 import { DndContext, useDraggable, useDroppable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
-
 const MAX_DEFAULT_COURSES = 4;
 
 function CourseItem({ courseName, isRecommended }) {
@@ -13,6 +12,11 @@ function CourseItem({ courseName, isRecommended }) {
     useDraggable({
       id: courseName,
     });
+
+  const userData = useContext(UserDataContext);
+  useEffect(() => {
+    console.log("test", userData);
+  }, []);
 
   return (
     <div
