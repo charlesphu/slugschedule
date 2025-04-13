@@ -321,20 +321,31 @@ export default function CalendarPage() {
   const userDataContext = useContext(UserDataContext);
   const router = useRouter();
 
-  if (
-    !userDataContext ||
-    !userDataContext.transcriptData ||
-    !userDataContext.transcriptData.className
-  ) {
-    return router.push("/");
-  }
-
   useEffect(() => {
-    useRemainingClasses(classesTaken).then((res) => {
-      setRemainingClasses(res);
-      console.log(res);
-    });
-  }, []);
+    // Reroute to home page if no user data is found
+    if (
+      !userDataContext ||
+      !userDataContext.transcriptData ||
+      !userDataContext.transcriptData.className
+    ) {
+      router.push("/");
+    } else {
+      if (userDataContext.transcriptData.classesTaken) {
+        useRemainingClasses(userDataContext.transcriptData.classesTaken)
+          .then((res) => {
+            // Ensure res is an array before setting state
+            setRemainingClasses(Array.isArray(res) ? res : []);
+            console.log(res);
+          })
+          .catch((err) => {
+            console.error("Error fetching remaining classes:", err);
+            setRemainingClasses([]);
+          });
+      } else {
+        setRemainingClasses([]);
+      }
+    }
+  }, [userDataContext]);
 
   const handleDragEnd = (event) => {
     const { active, over } = event;
