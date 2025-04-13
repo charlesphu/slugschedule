@@ -23,7 +23,7 @@ export default function Container({
         </h3>
         {/* Underscore */}
         <div
-          className="h-1.5 rounded-md bg-[var(--container-secondary)]"
+          className="h-1.5 rounded-md bg-[var(--container-tertiary)]"
           style={{ width: underscoreWidth }}></div>
       </div>
 
