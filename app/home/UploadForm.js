@@ -9,11 +9,6 @@ import { UseWebscrape } from "../hooks/webscrape";
 import { getMissingClasses } from "../api/timeScraper/utils/classhelper";
 import { suggestRecs } from "../hooks/suggestRecs";
 
-
-
-
-
-
 function UploadArea() {
   const [isFileUploading, setIsFileUploading] = useState(false);
   const [isFileUploaded, setIsFileUploaded] = useState(false);
@@ -39,7 +34,7 @@ function UploadArea() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          pdfText,
+          content: pdfText,
           requestType: "pdf",
         }),
       });
