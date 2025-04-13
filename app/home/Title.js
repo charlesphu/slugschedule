@@ -5,7 +5,7 @@ export default function Title() {
         Slug Scheduler
       </h1>
       <h2 className="text-3xl font-medium text-[var(--text-primary)]">
-        Next quarter's{" "}
+        Next quarter&apos;s{" "}
         <span className="font-bold text-[var(--text-primary)] italic">
           perfect{" "}
         </span>
