@@ -44,7 +44,7 @@ function Container({ title, children, underscoreWidth = "60%" }) {
 function Title() {
   const router = useRouter();
   return (
-    <div className="absolute top-10 w-full items-center text-center">
+    <div className="absolute top-10 z-5 w-full items-center text-center">
       <button
         className="cursor-pointer"
         onClick={() => {
@@ -548,7 +548,7 @@ function ClassSchedule() {
       {/* Vector Image */}
       <div className="relative w-full">
         <img
-          className="-0 absolute top-[-12rem] right-[4rem] z-[-1] h-30 w-30 object-contain duration-500 hover:top-[-8rem]"
+          className="-0 absolute top-[-12rem] right-[4rem] z-[-1] h-30 w-30 object-contain duration-500"
           src={"Slug Book.png"}
           draggable={false}
         />
