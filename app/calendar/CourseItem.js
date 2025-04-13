@@ -7,12 +7,17 @@ export default function CourseItem({ courseName, isRecommended }) {
       id: courseName,
     });
 
+  if (transform) {
+    transform.scaleX = 1;
+    transform.scaleY = 1;
+  }
+
   return (
     <div
       ref={setNodeRef}
       style={{
         transform: CSS.Transform.toString(transform),
-        zIndex: isDragging ? 5 : 2,
+        zIndex: isDragging ? 100 : 1,
       }}
       {...listeners}
       {...attributes}>
