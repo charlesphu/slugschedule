@@ -5,7 +5,7 @@ import { useDropzone } from "react-dropzone";
 import { UsePDFToText } from "../hooks/usePDFToText";
 import { UserDataContext } from "../layout";
 import { useRouter } from "next/navigation";
-import { useWebscrape } from "../hooks/webscrape"; // Import the web scraping hook
+import { UseWebscrape } from "../hooks/webscrape"; // Import the web scraping hook
 
 function UploadArea() {
   const [isFileUploading, setIsFileUploading] = useState(false);
@@ -70,7 +70,7 @@ function UploadArea() {
 
     try {
       // Scrape both URLs
-      const scrapedHTML = await useWebscrape(url);
+      const scrapedHTML = await UseWebscrape(url);
       console.log("Combined Scraped HTML:", scrapedHTML);
 
       // Send the combined scraped data to Gemini

@@ -1,4 +1,4 @@
-export async function useWebscrape(url) {
+export async function UseWebscrape(url) {
   let fullPageContent;
   try {
     const response = await fetch("/api/webscraper", {
