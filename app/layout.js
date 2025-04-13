@@ -1,4 +1,4 @@
-"use client"; 
+"use client";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import React, { createContext, useState } from "react";
@@ -20,9 +20,17 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      <head>
+        {/* Only include React-Scan in development */}
+        {process.env.NODE_ENV === "development" && (
+          <Script
+            crossOrigin="anonymous"
+            src="//unpkg.com/react-scan/dist/auto.global.js"
+          />
+        )}
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <UserDataContext.Provider value={{ transcriptData, setTranscriptData }}>
           {children}
         </UserDataContext.Provider>
