@@ -61,36 +61,24 @@ function UploadArea() {
       // setIsFileProcessing(false); // We want the spinner to stay until the routing is done (for now)
       setIsFileUploading(false);
     }
-    await handleScrapeAndSendToGemini();
+    await handleScrapeAndSave();
   };
 
-  const handleScrapeAndSendToGemini = async () => {
-    const url =
-      "https://catalog.ucsc.edu/en/current/general-catalog/academic-units/baskin-engineering/computer-science-and-engineering/computer-science-bs/";
-
+  const handleScrapeAndSave = async () => {
     try {
-      // Scrape both URLs
-      const scrapedHTML = await UseWebscrape(url);
-      console.log("Combined Scraped HTML:", scrapedHTML);
-
-      // Send the combined scraped data to Gemini
-      const response = await fetch("/api/gemini", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          pdfText: scrapedHTML, // Reusing pdfText field for simplicity
-          requestType: "majorRequirements",
-        }),
-      });
-
-      const data = await response.json();
-      console.log("Gemini Response for Scraped Data:", data);
+      console.log("Calling scrape API...");
+      const res = await fetch("/api/timeScraper");
+      const result = await res.json();
+  
+      if (result.success) {
+        console.log("Scrape complete! File saved.");
+      } else {
+        console.error("Scrape failed:", result.message);
+      }
     } catch (error) {
-      console.error("Error scraping URLs or sending to Gemini:", error);
+      console.error("Error calling scrape API:", error);
     }
-  };
+  };  
 
   const { getRootProps, getInputProps, open, isDragActive } = useDropzone({
     onDrop,
