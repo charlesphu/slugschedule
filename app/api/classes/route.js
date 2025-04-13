@@ -111,16 +111,16 @@ async function getClasses() {
         const instructionMode = find(".hide-print b").text().trim();
 
         // Extract enrollment info
-        const enrollmentText = find(".panel-body .row > div:nth-child(4)")
-          .text()
-          .trim();
-        let enrolled = 0,
-          capacity = 0;
-        const enrollmentMatch = enrollmentText.match(/(\d+) of (\d+)/);
-        if (enrollmentMatch) {
-          enrolled = parseInt(enrollmentMatch[1]);
-          capacity = parseInt(enrollmentMatch[2]);
-        }
+        // const enrollmentText = find(".panel-body .row > div:nth-child(4)")
+        //   .text()
+        //   .trim();
+        // let enrolled = 0,
+        //   capacity = 0;
+        // const enrollmentMatch = enrollmentText.match(/(\d+) of (\d+)/);
+        // if (enrollmentMatch) {
+        //   enrolled = parseInt(enrollmentMatch[1]);
+        //   capacity = parseInt(enrollmentMatch[2]);
+        // }
 
         classes.push({
           code: code.trim(),
@@ -130,10 +130,10 @@ async function getClasses() {
             location: location || "Not specified",
             instructionMode: instructionMode || "Not specified",
           },
-          enrollment: {
-            enrolled,
-            capacity,
-          },
+          // enrollment: {
+          //   enrolled,
+          //   capacity,
+          // },
         });
       });
 
