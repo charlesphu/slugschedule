@@ -139,24 +139,29 @@ export default function CalendarPage() {
     } else {
       fetchRemainingClasses(userDataContext.transcriptData.classes)
         .then((res) => {
-          console.log("Remaining classes:", res);
-    
-          suggestRecs(res).then((classes) => {  
-              console.log("im here");
-              const rawText = classes.data.candidates[0].content.parts[0].text;
-              console.log("Raw suggested classes:", rawText);
-              const cleanedText = rawText.replace(/```json|```/g, "").trim();
-              try {
-                const parsedData = JSON.parse(cleanedText);
-                console.log("Parsed suggested classes:", parsedData);
-    
-                setRemainingClasses(parsedData);
-              } catch (error) {
-                console.error("Error parsing JSON:", error, "Cleaned text:", cleanedText);
-              }
-           
+          // setRemainingClasses(res);
+          suggestRecs(res).then((classes) => {
+            const rawText = classes.data.candidates[0].content.parts[0].text;
+            const cleanedText = rawText.replace(/```json|```/g, "").trim();
+            try {
+              // Mark the first four classes as recommended
+              const parsedData = JSON.parse(cleanedText);
+              parsedData.forEach((course, index) => {
+                if (index < 4) {
+                  course.recommended = true;
+                }
+              });
+
+              setRemainingClasses(parsedData);
+            } catch (error) {
+              console.error(
+                "Error parsing JSON:",
+                error,
+                "Cleaned text:",
+                cleanedText
+              );
+            }
           });
-    
         })
         .catch((err) => {
           console.error("Error fetching remaining classes:", err);

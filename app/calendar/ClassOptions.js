@@ -24,7 +24,7 @@ export default function ClassOptions({ classes = [] }) {
               <CourseItem
                 key={index}
                 courseName={courseData.code}
-                isRecommended={index < 2} // First two are recommended
+                isRecommended={courseData.recommended} // First two are recommended
               />
             );
           })}
