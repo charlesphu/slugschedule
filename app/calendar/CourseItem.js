@@ -22,7 +22,7 @@ export default function CourseItem({ courseName, isRecommended }) {
       {...listeners}
       {...attributes}>
       <button
-        className="relative flex h-15 w-40 items-center justify-center rounded-md bg-[var(--container-secondary)]"
+        className="relative flex h-15 w-40 cursor-pointer items-center justify-center rounded-md bg-[var(--container-secondary)]"
         style={{
           scale: isDragging ? 1.05 : 1,
           boxShadow: isDragging

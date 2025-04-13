@@ -99,6 +99,10 @@ function createEventsFromCourse(courseData) {
         instructionMode: schedule.instructionMode,
         courseCode: code,
       },
+      editable: false,
+      draggable: false,
+      startEditable: false,
+      durationEditable: false,
     });
   });
 
