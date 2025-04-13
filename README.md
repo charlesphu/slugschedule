@@ -60,10 +60,6 @@ npm run dev
 - `npm run dev`: Starts development server with Turbopack
 - `npm run build`: Creates production build
 
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
 ## 🙏 Acknowledgments
 
 ### The Team:
@@ -74,3 +70,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - **Alaaddin Ghosheh** - Backend & Gemini
 
 Special thanks to the CruzHacks 2025 organizing team for hosting an amazing hackathon that made this project possible
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
