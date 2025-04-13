@@ -188,7 +188,7 @@ export default function CalendarPage() {
     // Create calendar events from the course data
     let newEvents = createEventsFromCourse(courseData);
 
-    // Make sure the new events are unique
+    // Update events and make sure the new events are unique
     setEvents((prev) => {
       const existingCourseCodes = new Set(
         prev.map((event) => event.extendedProps.courseCode)
@@ -201,13 +201,34 @@ export default function CalendarPage() {
         ),
       ];
     });
+
+    // Remove the course from the remaining classes by setting hidden
+    setRemainingClasses((prev) => {
+      return prev.map((course) => {
+        if (course.code === courseData.code) {
+          return { ...course, hidden: true };
+        }
+        return course;
+      });
+    });
   }, []);
 
   const removeCourseFromCalendar = useCallback((courseCode) => {
+    // Remove the course from the calendar events
     setEvents((prev) => {
       return prev.filter(
         (event) => event.extendedProps.courseCode !== courseCode
       );
+    });
+
+    // Add the course back to the remaining classes by removing hidden
+    setRemainingClasses((prev) => {
+      return prev.map((course) => {
+        if (course.code === courseCode) {
+          return { ...course, hidden: false };
+        }
+        return course;
+      });
     });
   }, []);
 
