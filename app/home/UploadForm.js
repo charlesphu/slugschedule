@@ -5,7 +5,8 @@ import { useDropzone } from "react-dropzone";
 import { UsePDFToText } from "../hooks/usePDFToText";
 import { UserDataContext } from "../layout";
 import { useRouter } from "next/navigation";
-import { UseWebscrape } from "../hooks/webscrape"; // Import the web scraping hook
+import { UseWebscrape } from "../hooks/webscrape"; 
+import { getClassData } from "../api/timeScraper/utils/classhelper";
 
 function UploadArea() {
   const [isFileUploading, setIsFileUploading] = useState(false);
@@ -26,7 +27,6 @@ function UploadArea() {
     setIsFileProcessing(true);
 
     try {
-      console.log("Extracted PDF Text:", pdfText);
 
       const response = await fetch("/api/gemini", {
         method: "POST",
@@ -40,14 +40,12 @@ function UploadArea() {
       });
 
       const data = await response.json();
-      console.log("Transcript data: ", data);
 
       if (data.success) {
         // Extract the text field and parse it as JSON
         const rawText = data.data.candidates[0].content.parts[0].text;
-        const jsonText = JSON.parse(rawText.replace(/```json\n|\n```/g, "")); // Remove code block markers and parse JSON
-
-        // Update the context with the parsed JSON object
+        const jsonText = JSON.parse(rawText.replace(/```json\n|\n```/g, ""));
+        console.log("Parsed JSON:", jsonText.classes);
         setTranscriptData(jsonText);
 
         // Reroute to /calendar
@@ -72,6 +70,9 @@ function UploadArea() {
   
       if (result.success) {
         console.log("Scrape complete! File saved.");
+        const classes = result.data.classes; // Assuming 'classes' is in result.data
+        const classData = await getClassData(classes);
+        console.log("Filtered Class Data:", classData);
       } else {
         console.error("Scrape failed:", result.message);
       }
@@ -79,6 +80,42 @@ function UploadArea() {
       console.error("Error calling scrape API:", error);
     }
   };  
+  
+
+
+
+
+
+
+  const handleScrapeAndSendToGemini = async () => {
+    const url =
+      "https://catalog.ucsc.edu/en/current/general-catalog/academic-units/baskin-engineering/computer-science-and-engineering/computer-science-bs/";
+
+    try {
+      // Scrape both URLs
+      const scrapedHTML = await UseWebscrape(url);
+      console.log("Combined Scraped HTML:", scrapedHTML);
+
+      // Send the combined scraped data to Gemini
+      const response = await fetch("/api/gemini", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          pdfText: scrapedHTML, // Reusing pdfText field for simplicity
+          requestType: "majorRequirements",
+        }),
+      });
+
+      const data = await response.json();
+    } catch (error) {
+      console.error("Error scraping URLs or sending to Gemini:", error);
+    }
+  };
+
+
+  // get reccomended classes
 
   const { getRootProps, getInputProps, open, isDragActive } = useDropzone({
     onDrop,
@@ -95,8 +132,7 @@ function UploadArea() {
     if (isDragActive) {
       setIsDragHovered(true);
     } else {
-      // Add a small delay before setting isDragHovered to false
-      // This prevents flickering when user is moving the file around
+    
       setTimeout(() => {
         setIsDragHovered(false);
       }, 100); // 150ms delay

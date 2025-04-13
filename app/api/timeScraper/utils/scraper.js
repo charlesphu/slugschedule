@@ -1,6 +1,7 @@
 import fetch from "node-fetch";
 import * as cheerio from "cheerio";
 import { writeFileSync } from "fs";
+import path from "path";
 
 const ENDPOINT = "https://pisa.ucsc.edu/cs9/prd/sr9_2013/index.php";
 const RESULTS_PER_PAGE = "2500"; // Number of results per page
@@ -162,9 +163,12 @@ export async function getClasses() {
       classes: classes,
     };
 
-    // Save the data to classes.json
-    writeFileSync("classes.json", JSON.stringify(output, null, 2), "utf-8");
-
+   
+    writeFileSync(
+      path.resolve(process.cwd(), "app/api/timeScraper/utils/classes.json"),
+      JSON.stringify(output, null, 2),
+      "utf-8"
+    );
     console.log("Data has been written to classes.json");
 
     return output;

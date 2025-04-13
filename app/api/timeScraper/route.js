@@ -1,6 +1,7 @@
 import { getClasses } from "./utils/scraper.js"
 
 export async function GET(request) {
+  console.log("received request:", request);
   try {
     console.log("Starting class scraping...");
 
