@@ -8,7 +8,7 @@ A smart scheduling assistant for UC Santa Cruz students that creates recommended
 - **Smart Schedule Generation**: Creates optimized class schedules based on your major requirements
 - **Interactive Calendar**: Visualize and modify your class schedule with an intuitive drag-and-drop interface
 - **Major Requirements Integration**: Automatically checks degree requirements against UCSC's course catalog
-- **Web Scraping**: Pulls real-time course data from UCSC's class search
+- **Web Scraping**: Pulls course data from UCSC's class search and major websites
 
 ## 📸 Screenshots
 
