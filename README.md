@@ -1,6 +1,6 @@
 # Slug Scheduler
 
-An intelligent class scheduling assistant for UC Santa Cruz students that helps create the perfect schedule in minutes.
+A smart scheduling assistant for UC Santa Cruz students that creates recommended class schedules in minutes. Upload your transcript to analyze academic progress, generate schedules based on major requirements, and visualize your courses in an interactive calendar interface!
 
 ## 🎯 Features
 

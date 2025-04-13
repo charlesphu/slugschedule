@@ -24,12 +24,12 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         {/* Only include React-Scan in development */}
-        {process.env.NODE_ENV === "development" && (
+        {/* {process.env.NODE_ENV === "development" && (
           <Script
             crossOrigin="anonymous"
             src="//unpkg.com/react-scan/dist/auto.global.js"
           />
-        )}
+        )} */}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
