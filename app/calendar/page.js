@@ -189,15 +189,18 @@ export default function CalendarPage() {
     let newEvents = createEventsFromCourse(courseData);
 
     // Make sure the new events are unique
-    const existingCourseCodes = new Set(
-      events.map((event) => event.extendedProps.courseCode)
-    );
+    setEvents((prev) => {
+      const existingCourseCodes = new Set(
+        prev.map((event) => event.extendedProps.courseCode)
+      );
 
-    newEvents = newEvents.filter(
-      (event) => !existingCourseCodes.has(event.extendedProps.courseCode)
-    );
-
-    setEvents((prev) => [...prev, ...newEvents]);
+      return [
+        ...prev,
+        ...newEvents.filter(
+          (event) => !existingCourseCodes.has(event.extendedProps.courseCode)
+        ),
+      ];
+    });
   }, []);
 
   const removeCourseFromCalendar = useCallback((courseCode) => {
