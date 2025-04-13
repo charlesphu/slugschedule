@@ -154,23 +154,26 @@ export default function CalendarPage() {
     }
   }, [userDataContext]);
 
-  const handleDragEnd = (event) => {
-    const { active, over } = event;
+  const handleDragEnd = useCallback(
+    (event) => {
+      const { active, over } = event;
 
-    if (over && over.id === "calendar-drop-area") {
-      // Find the course data based on the dragged item ID (courseName)
-      const courseData = remainingClasses.find(
-        (course) => course.code === active.id
-      );
+      if (over && over.id === "calendar-drop-area") {
+        // Find the course data based on the dragged item ID (courseName)
+        const courseData = remainingClasses.find(
+          (course) => course.code === active.id
+        );
 
-      if (courseData) {
-        // Add the course as a new calendar event
-        addCourseToCalendar(courseData);
+        if (courseData) {
+          // Add the course as a new calendar event
+          addCourseToCalendar(courseData);
+        }
       }
-    }
-  };
+    },
+    [remainingClasses]
+  );
 
-  const addCourseToCalendar = (courseData) => {
+  const addCourseToCalendar = useCallback((courseData) => {
     // Parse the day and time information from course schedule
     const { schedule } = courseData;
     if (
@@ -195,7 +198,7 @@ export default function CalendarPage() {
     );
 
     setEvents((prev) => [...prev, ...newEvents]);
-  };
+  }, []);
 
   const removeCourseFromCalendar = useCallback((courseCode) => {
     setEvents((prev) => {
