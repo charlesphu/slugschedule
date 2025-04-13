@@ -10,6 +10,14 @@ An intelligent class scheduling assistant for UC Santa Cruz students that helps 
 - **Major Requirements Integration**: Automatically checks degree requirements against UCSC's course catalog
 - **Web Scraping**: Pulls real-time course data from UCSC's class search
 
+## 📸 Screenshots
+
+![Home Page](public/screenshots/Home.png)
+_Friendly landing page for users to upload their university transcript_
+
+![Calendar View](public/screenshots/Schedule.png)
+_Calendar view with course recommendations for easy scheduling_
+
 ## 🚀 Tech Stack
 
 - **Framework**: [Next.js 15.3.0](https://nextjs.org/)
