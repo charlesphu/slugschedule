@@ -326,24 +326,19 @@ export default function CalendarPage() {
     if (
       !userDataContext ||
       !userDataContext.transcriptData ||
-      !userDataContext.transcriptData.className
+      !userDataContext.transcriptData.classes
     ) {
       router.push("/");
     } else {
-      if (userDataContext.transcriptData.classesTaken) {
-        useRemainingClasses(userDataContext.transcriptData.classesTaken)
-          .then((res) => {
-            // Ensure res is an array before setting state
-            setRemainingClasses(Array.isArray(res) ? res : []);
-            console.log(res);
-          })
-          .catch((err) => {
-            console.error("Error fetching remaining classes:", err);
-            setRemainingClasses([]);
-          });
-      } else {
-        setRemainingClasses([]);
-      }
+      useRemainingClasses(userDataContext.transcriptData.classes)
+        .then((res) => {
+          // Ensure res is an array before setting state
+          setRemainingClasses(Array.isArray(res) ? res : []);
+        })
+        .catch((err) => {
+          console.error("Error fetching remaining classes:", err);
+          setRemainingClasses([]);
+        });
     }
   }, [userDataContext]);
 
