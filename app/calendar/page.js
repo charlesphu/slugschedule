@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
+import { UserDataContext } from "../layout";
 
 import { DndContext, useDraggable, useDroppable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
@@ -461,6 +462,8 @@ const TEST_COURSES = [
 function createEventsFromCourse(courseData) {
   const { code, name, schedule } = courseData;
   const { dayAndTime, location } = schedule;
+
+  const userClasses = useContext(UserDataContext).classes;
 
   // Skip if no specific time
   if (dayAndTime === "Not specified") {
