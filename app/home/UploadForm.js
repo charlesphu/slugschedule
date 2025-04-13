@@ -2,7 +2,7 @@
 
 import React, { useContext, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { usePDFToText } from "../hooks/usePDFToText";
+import { UsePDFToText } from "../hooks/usePDFToText";
 import { UserDataContext } from "../layout";
 import { useRouter } from "next/navigation";
 import { useWebscrape } from "../hooks/webscrape"; // Import the web scraping hook
@@ -20,7 +20,7 @@ function UploadArea() {
 
     const file = acceptedFiles[0];
     const pdfURL = URL.createObjectURL(file);
-    const pdfText = await usePDFToText(pdfURL);
+    const pdfText = await UsePDFToText(pdfURL);
 
     setIsFileUploaded(true);
     setIsFileProcessing(true);

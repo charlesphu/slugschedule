@@ -5,7 +5,7 @@ import "pdfjs-dist/build/pdf.worker";
 // Make a global worker to be used by pdfjs
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
-export async function usePDFToText(pdfUrl) {
+export async function UsePDFToText(pdfUrl) {
   console.log("called");
   const pdf = await pdfjsLib.getDocument(pdfUrl).promise;
   let fullText = "";
