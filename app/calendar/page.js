@@ -1,4 +1,5 @@
 "use client";
+
 import { useContext } from "react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -457,6 +458,108 @@ const TEST_COURSES = [
   },
 ];
 
+function createEventsFromCourse(courseData) {
+  const { code, name, schedule } = courseData;
+  const { dayAndTime, location } = schedule;
+
+  // Skip if no specific time
+  if (dayAndTime === "Not specified") {
+    return [];
+  }
+
+  // Parse day and time information
+  // Example format: "TuTh 08:25AM-10:00AM" or "M 12:00PM-03:00PM"
+  const dayMatch = dayAndTime.match(
+    /^([MTuWThF]+)\s+(\d+:\d+(?:AM|PM))-(\d+:\d+(?:AM|PM))/
+  );
+
+  if (!dayMatch) {
+    return [];
+  }
+
+  const dayStr = dayMatch[1];
+  const startTime = dayMatch[2];
+  const endTime = dayMatch[3];
+
+  // Convert days string to array of day codes
+  const dayMapping = {
+    M: "MO",
+    Tu: "TU",
+    W: "WE",
+    Th: "TH",
+    F: "FR",
+  };
+
+  const days = [];
+  let current = "";
+
+  // Parse the day string (e.g., "TuTh" -> ["TU", "TH"])
+  for (let i = 0; i < dayStr.length; i++) {
+    current += dayStr[i];
+    if (dayMapping[current]) {
+      days.push(dayMapping[current]);
+      current = "";
+    }
+  }
+
+  // Create an event for each day
+  const events = [];
+  const baseDate = "2025-04-14"; // Monday
+  const dayOffsets = { MO: 0, TU: 1, WE: 2, TH: 3, FR: 4 };
+
+  // Convert time to 24-hour format
+  const convertTo24Hour = (timeStr) => {
+    const [time, modifier] = timeStr.split(/(?:AM|PM)/);
+    let [hours, minutes] = time.split(":");
+    hours = parseInt(hours, 10);
+
+    if (timeStr.includes("PM") && hours < 12) {
+      hours += 12;
+    }
+    if (timeStr.includes("AM") && hours === 12) {
+      hours = 0;
+    }
+
+    return `${hours.toString().padStart(2, "0")}:${minutes}`;
+  };
+
+  const start24 = convertTo24Hour(startTime);
+  const end24 = convertTo24Hour(endTime);
+
+  days.forEach((day) => {
+    const dayOffset = dayOffsets[day];
+    const eventDate = new Date(baseDate);
+    eventDate.setDate(eventDate.getDate() + dayOffset);
+
+    const dateStr = eventDate.toISOString().split("T")[0];
+
+    events.push({
+      title: `${code} - ${name}`,
+      start: `${dateStr}T${start24}:00`,
+      end: `${dateStr}T${end24}:00`,
+      backgroundColor: generateColorFromString(code),
+      extendedProps: {
+        location: location,
+        instructionMode: schedule.instructionMode,
+        courseCode: code,
+      },
+    });
+  });
+
+  return events;
+}
+
+// Generate a consistent color based on the course code
+function generateColorFromString(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  const h = hash % 360;
+  return `hsl(${h}, 70%, 70%)`;
+}
+
 function CourseItem({ courseName, isRecommended }) {
   const { attributes, listeners, setNodeRef, transform, isDragging } =
     useDraggable({
@@ -585,29 +688,11 @@ function ClassOptions() {
   );
 }
 
-function ClassSchedule() {
+function ClassSchedule({ calendarEvents = [] }) {
   const [isHoveringUpload, setIsHoveringUpload] = useState(false);
-
-  const events = [
-    {
-      title: "Design Review",
-      start: "2025-04-14T10:00:00",
-      end: "2025-04-14T11:00:00",
-      color: "bg-blue-500",
-    },
-    {
-      title: "Client Call",
-      start: "2025-04-15T15:00:00",
-      end: "2025-04-15T16:00:00",
-      color: "bg-green-500",
-    },
-    {
-      title: "Client Test",
-      start: "2025-04-15T09:00:00",
-      end: "2025-04-15T16:00:00",
-      color: "bg-purple-500",
-    },
-  ];
+  const { setNodeRef } = useDroppable({
+    id: "calendar-drop-area",
+  });
 
   return (
     <Container
@@ -627,7 +712,7 @@ function ClassSchedule() {
       />
 
       {/* Calendar Section */}
-      <div className="h-[22.5rem] w-[35rem] overflow-y-hidden">
+      <div ref={setNodeRef} className="h-[22.5rem] w-[35rem] overflow-y-hidden">
         <FullCalendar
           plugins={[timeGridPlugin, interactionPlugin]}
           initialView="timeGridWeek"
@@ -649,6 +734,21 @@ function ClassSchedule() {
           dayHeaderContent={(
             arg // Get rid of the default date format to show only weekday
           ) => arg.date.toLocaleDateString("en-US", { weekday: "short" })}
+          events={calendarEvents}
+          eventContent={(eventInfo) => {
+            return (
+              <div className="h-full overflow-hidden p-1">
+                <div className="text-sm font-medium">
+                  {eventInfo.event.title}
+                </div>
+                {eventInfo.event.extendedProps.location && (
+                  <div className="truncate text-xs opacity-70">
+                    {eventInfo.event.extendedProps.location}
+                  </div>
+                )}
+              </div>
+            );
+          }}
         />
       </div>
     </Container>
@@ -656,6 +756,41 @@ function ClassSchedule() {
 }
 
 export default function CalendarPage() {
+  const [events, setEvents] = useState([]);
+
+  const handleDragEnd = (event) => {
+    const { active, over } = event;
+
+    if (over && over.id === "calendar-drop-area") {
+      // Find the course data based on the dragged item ID (courseName)
+      const courseData = TEST_COURSES.find(
+        (course) => course.code === active.id
+      );
+
+      if (courseData) {
+        // Add the course as a new calendar event
+        addCourseToCalendar(courseData);
+      }
+    }
+  };
+
+  const addCourseToCalendar = (courseData) => {
+    // Parse the day and time information from course schedule
+    const { schedule } = courseData;
+    if (
+      schedule.dayAndTime === "Not specified" ||
+      schedule.instructionMode === "Asynchronous Online"
+    ) {
+      // Handle async courses or those without specific times
+      alert(`${courseData.code} is asynchronous or has no specified time`);
+      return;
+    }
+
+    // Create calendar events from the course data
+    const newEvents = createEventsFromCourse(courseData);
+    setEvents((prev) => [...prev, ...newEvents]);
+  };
+
   return (
     <div className="relative h-screen w-full">
       {/* Title */}
@@ -663,9 +798,9 @@ export default function CalendarPage() {
 
       {/* Content */}
       <div className="relative z-1 flex h-screen w-full items-center justify-center gap-12 pt-20">
-        <DndContext>
+        <DndContext id="calendar-dnd" onDragEnd={handleDragEnd}>
           <ClassOptions />
-          <ClassSchedule />
+          <ClassSchedule calendarEvents={events} />
         </DndContext>
       </div>
 
