@@ -1,10 +1,12 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
+
 import { UserDataContext } from "../layout";
+import useRemainingClasses from "../hooks/useRemainingClasses";
 
 import { DndContext, useDraggable, useDroppable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
@@ -463,8 +465,6 @@ function createEventsFromCourse(courseData) {
   const { code, name, schedule } = courseData;
   const { dayAndTime, location } = schedule;
 
-  const userClasses = useContext(UserDataContext).classes;
-
   // Skip if no specific time
   if (dayAndTime === "Not specified") {
     return [];
@@ -760,6 +760,15 @@ function ClassSchedule({ calendarEvents = [] }) {
 
 export default function CalendarPage() {
   const [events, setEvents] = useState([]);
+  const [remainingClasses, setRemainingClasses] = useState([]);
+
+  const classesTaken = useContext(UserDataContext).transcriptData.classes;
+
+  useEffect(() => {
+    useRemainingClasses(classesTaken).then((res) => {
+      setRemainingClasses(res);
+    });
+  }, []);
 
   const handleDragEnd = (event) => {
     const { active, over } = event;
