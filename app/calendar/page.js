@@ -47,9 +47,18 @@ function CourseItem({ courseName, isRecommended }) {
   );
 }
 
-function Container({ title, children, underscoreWidth = "60%" }) {
+function Container({
+  title,
+  children,
+  underscoreWidth = "60%",
+  onMouseEnter,
+  onMouseLeave,
+}) {
   return (
-    <section className="flex flex-col gap-5 rounded-xl bg-[var(--container-primary)] p-6 shadow-md">
+    <section
+      className="flex flex-col gap-5 rounded-xl bg-[var(--container-primary)] p-6 shadow-md"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}>
       {/* Container Header */}
       <div className="relative flex flex-col gap-2">
         <h3 className="text-2xl font-bold text-[var(--text-primary)]">
@@ -568,14 +577,23 @@ function ClassOptions() {
 }
 
 function ClassSchedule() {
+  const [isHoveringUpload, setIsHoveringUpload] = useState(false);
+
   return (
-    <Container title={"Class Schedule"}>
+    <Container
+      title={"Class Schedule"}
+      onMouseEnter={() => setIsHoveringUpload(true)}
+      onMouseLeave={() => setIsHoveringUpload(false)}>
       {/* Vector Image */}
       <div className="relative w-full">
         <img
           className="-0 absolute top-[-12rem] right-[4rem] z-[-1] h-30 w-30 object-contain duration-500"
           src={"Slug Book.png"}
           draggable={false}
+          style={{
+            top: isHoveringUpload ? "-12rem" : "-9.8rem",
+            transition: "top 500ms ease-in-out",
+          }}
         />
       </div>
       <div className="h-70 w-150" />
