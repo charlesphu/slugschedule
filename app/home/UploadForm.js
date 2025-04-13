@@ -44,11 +44,8 @@ function UploadArea() {
         // Extract the text field and parse it as JSON
         const rawText = data.data.candidates[0].content.parts[0].text;
         const jsonText = JSON.parse(rawText.replace(/```json\n|\n```/g, ""));
-        console.log("Parsed JSON:", jsonText.classes);
 
         setTranscriptData(jsonText);
-
-        console.log("Transcript Data:", UserDataContext);
 
         // Reroute to /calendar
         router.push("/calendar");
