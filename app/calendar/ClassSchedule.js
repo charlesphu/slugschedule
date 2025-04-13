@@ -7,7 +7,10 @@ import interactionPlugin, { Draggable } from "@fullcalendar/interaction";
 
 import Container from "./Container";
 
-export default function ClassSchedule({ calendarEvents = [] }) {
+export default function ClassSchedule({
+  calendarEvents = [],
+  handleRemoveEvent = () => {},
+}) {
   const [isHoveringUpload, setIsHoveringUpload] = useState(false);
   const { setNodeRef } = useDroppable({
     id: "calendar-drop-area",
@@ -56,7 +59,13 @@ export default function ClassSchedule({ calendarEvents = [] }) {
           events={calendarEvents}
           eventContent={(eventInfo) => {
             return (
-              <div className="h-full overflow-hidden p-1">
+              <div className="relative h-full overflow-hidden p-1">
+                <button
+                  className="absolute top-0 right-0 h-full w-full cursor-pointer"
+                  onClick={() => {
+                    handleRemoveEvent(eventInfo.event.extendedProps.courseCode);
+                  }}
+                />
                 <div className="truncate text-sm font-medium">
                   {eventInfo.event.title}
                 </div>

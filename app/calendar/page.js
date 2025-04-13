@@ -1,11 +1,13 @@
 "use client";
 
-import { useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { UserDataContext } from "../layout";
+
 import fetchRemainingClasses from "../hooks/fetchRemainingClasses";
+import { suggestRecs } from "../hooks/suggestRecs";
 
 import { DndContext } from "@dnd-kit/core";
 
@@ -140,6 +142,9 @@ export default function CalendarPage() {
         .then((res) => {
           // Ensure res is an array before setting state
           setRemainingClasses(res);
+          suggestRecs(res).then((classes) => {
+            console.log("Suggested classes:", classes);
+          });
           console.log(res);
         })
         .catch((err) => {
@@ -178,9 +183,27 @@ export default function CalendarPage() {
     }
 
     // Create calendar events from the course data
-    const newEvents = createEventsFromCourse(courseData);
+    let newEvents = createEventsFromCourse(courseData);
+
+    // Make sure the new events are unique
+    const existingCourseCodes = new Set(
+      events.map((event) => event.extendedProps.courseCode)
+    );
+
+    newEvents = newEvents.filter(
+      (event) => !existingCourseCodes.has(event.extendedProps.courseCode)
+    );
+
     setEvents((prev) => [...prev, ...newEvents]);
   };
+
+  const removeCourseFromCalendar = useCallback((courseCode) => {
+    setEvents((prev) => {
+      return prev.filter(
+        (event) => event.extendedProps.courseCode !== courseCode
+      );
+    });
+  }, []);
 
   return (
     <div className="relative h-screen w-full">
@@ -191,7 +214,10 @@ export default function CalendarPage() {
       <div className="relative z-1 flex h-screen w-full items-center justify-center gap-12 pt-20">
         <DndContext id="calendar-dnd" onDragEnd={handleDragEnd}>
           <ClassOptions classes={remainingClasses} />
-          <ClassSchedule calendarEvents={events} />
+          <ClassSchedule
+            calendarEvents={events}
+            handleRemoveEvent={removeCourseFromCalendar}
+          />
         </DndContext>
       </div>
 
