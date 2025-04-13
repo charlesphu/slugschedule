@@ -48,7 +48,7 @@ export async function POST(request) {
     } else if (requestType == "rankings") {
       prompt = "This is JSON data for classes that are being offered in the current academic quarter that a student is able to take " +
       "Please reearange the JSON data in order from highest to lowest ranking. Base this ranking off of the objective quality of the content of the class" +
-      "please be mindful that this response will be treated as a JSON object so do not return anything other than a JSON object. Please add an attribute for the top 5 positions to imply it is a 'reccomended' course. such as reccomended: true, only" +
+      "please be mindful that this response will be treated as a JSON object so do not return anything other than a JSON object. Do not drop any existing attributes such as class schedule, every index must have them. Please add an attribute for the top 5 positions to imply it is a 'reccomended' course. such as reccomended: true, only" +
       "for the top 5 classes. Here is the JSON data: " +
       pdfText;
     }

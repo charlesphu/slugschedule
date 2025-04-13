@@ -7,6 +7,12 @@ import { UserDataContext } from "../layout";
 import { useRouter } from "next/navigation";
 import { UseWebscrape } from "../hooks/webscrape";
 import { getMissingClasses } from "../api/timeScraper/utils/classhelper";
+import { suggestRecs } from "../hooks/suggestRecs";
+
+
+
+
+
 
 function UploadArea() {
   const [isFileUploading, setIsFileUploading] = useState(false);
