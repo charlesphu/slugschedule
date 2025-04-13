@@ -122,6 +122,7 @@ export default function CalendarPage() {
 
   const userDataContext = useContext(UserDataContext);
   const router = useRouter();
+  const getRemaining = useRemainingClasses();
 
   useEffect(() => {
     // Reroute to home page if no user data is found
@@ -132,7 +133,7 @@ export default function CalendarPage() {
     ) {
       router.push("/");
     } else {
-      useRemainingClasses(userDataContext.transcriptData.classes)
+      getRemaining(userDataContext.transcriptData.classes)
         .then((res) => {
           // Ensure res is an array before setting state
           setRemainingClasses(res);
@@ -143,7 +144,7 @@ export default function CalendarPage() {
           setRemainingClasses([]);
         });
     }
-  }, [userDataContext]);
+  }, [userDataContext, getRemaining]);
 
   const handleDragEnd = (event) => {
     const { active, over } = event;
