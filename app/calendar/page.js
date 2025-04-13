@@ -130,7 +130,6 @@ export default function CalendarPage() {
   const router = useRouter();
 
   useEffect(() => {
-    // Reroute to home page if no user data is found
     if (
       !userDataContext ||
       !userDataContext.transcriptData ||
@@ -140,12 +139,24 @@ export default function CalendarPage() {
     } else {
       fetchRemainingClasses(userDataContext.transcriptData.classes)
         .then((res) => {
-          // Ensure res is an array before setting state
-          setRemainingClasses(res);
-          suggestRecs(res).then((classes) => {
-            console.log("Suggested classes:", classes);
+          console.log("Remaining classes:", res);
+    
+          suggestRecs(res).then((classes) => {  
+              console.log("im here");
+              const rawText = classes.data.candidates[0].content.parts[0].text;
+              console.log("Raw suggested classes:", rawText);
+              const cleanedText = rawText.replace(/```json|```/g, "").trim();
+              try {
+                const parsedData = JSON.parse(cleanedText);
+                console.log("Parsed suggested classes:", parsedData);
+    
+                setRemainingClasses(parsedData);
+              } catch (error) {
+                console.error("Error parsing JSON:", error, "Cleaned text:", cleanedText);
+              }
+           
           });
-          console.log(res);
+    
         })
         .catch((err) => {
           console.error("Error fetching remaining classes:", err);
